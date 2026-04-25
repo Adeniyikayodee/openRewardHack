@@ -1,0 +1,240 @@
+London poi locations — london dynamic routing dataset
+coordinates: openstreetmap nominatim (osm.org), errors corrected manually
+zones: straight-line km from charing cross — zone 1 <3 km, 2 <6 km, 3 <10 km, 4 10+ km
+========================================================================
+total: 211 unique locations across 8 categories
+
+TUBE & RAIL STATIONS (75)
+------------------------------------------------------------------------
+    1.  Aldgate                                            51.514248    -0.075719  zone 2
+    2.  Angel                                              51.532487    -0.106036  zone 2
+    3.  Baker Street                                       51.522585    -0.156743  zone 1
+    4.  Balham                                             51.442895    -0.151737  zone 3
+    5.  Bank                                               51.513429    -0.088689  zone 1
+    6.  Bethnal Green                                      51.527452    -0.056746  zone 2
+    7.  Blackfriars                                        51.510487    -0.103242  zone 1
+    8.  Bond Street                                        51.514256    -0.149786  zone 1
+    9.  Brixton                                            51.461661    -0.115322  zone 2
+   10.  Camden Town                                        51.539398    -0.141557  zone 2
+   11.  Canary Wharf                                       51.502824    -0.017979  zone 3
+   12.  Canning Town                                       51.513157     0.010116  zone 3
+   13.  Clapham Common                                     51.461528    -0.138497  zone 2
+   14.  Clapham North                                      51.464708    -0.129291  zone 2
+   15.  Clapham South                                      51.452902    -0.148554  zone 3
+   16.  Covent Garden                                      51.512961    -0.124190  zone 1
+   17.  Dalston Junction                                   51.545301    -0.075609  zone 2
+   18.  Deptford                                           51.478982    -0.026635  zone 3
+   19.  Earl's Court                                       51.491612    -0.193903  zone 2
+   20.  Edgware Road                                       51.519854    -0.167917  zone 2
+   21.  Elephant and Castle                                51.495300    -0.100100  zone 1
+   22.  Embankment                                         51.508163    -0.121147  zone 1
+   23.  Euston                                             51.528853    -0.134191  zone 1
+   24.  Farringdon                                         51.520499    -0.106048  zone 1
+   25.  Finsbury Park                                      51.564810    -0.106391  zone 3
+   26.  Forest Hill                                        51.439242    -0.053090  zone 3
+   27.  Goodge Street                                      51.520513    -0.134580  zone 1
+   28.  Great Portland Street                              51.522996    -0.143945  zone 1
+   29.  Green Park                                         51.507292    -0.143723  zone 1
+   30.  Greenwich                                          51.478250    -0.011436  zone 3
+   31.  Hammersmith                                        51.492656    -0.223839  zone 3
+   32.  Highbury and Islington                             51.546106    -0.103634  zone 2
+   33.  Holborn                                            51.517682    -0.118411  zone 1
+   34.  Kennington                                         51.488220    -0.105499  zone 1
+   35.  Kensal Rise                                        51.534405    -0.219172  zone 3
+   36.  Kilburn High Road                                  51.537861    -0.193196  zone 2
+   37.  King's Cross St Pancras                            51.530609    -0.123949  zone 1
+   38.  Knightsbridge                                      51.500849    -0.160150  zone 1
+   39.  Leicester Square                                   51.511595    -0.128283  zone 1
+   40.  Lewisham                                           51.465219    -0.012260  zone 3
+   41.  Liverpool Street                                   51.517264    -0.080571  zone 2
+   42.  London Bridge                                      51.504876    -0.085147  zone 1
+   43.  Mile End                                           51.525349    -0.033212  zone 3
+   44.  Moorgate                                           51.518252    -0.089063  zone 1
+   45.  New Cross                                          51.475687    -0.031173  zone 3
+   46.  Notting Hill Gate                                  51.508925    -0.196198  zone 2
+   47.  Old Street                                         51.525628    -0.087609  zone 2
+   48.  Oval                                               51.482497    -0.112875  zone 1
+   49.  Oxford Circus                                      51.515442    -0.141956  zone 1
+   50.  Paddington                                         51.515544    -0.175551  zone 2
+   51.  Peckham Rye                                        51.469257    -0.067872  zone 2
+   52.  Piccadilly Circus                                  51.509819    -0.134548  zone 1
+   53.  Putney Bridge                                      51.468726    -0.210292  zone 3
+   54.  Seven Sisters                                      51.582579    -0.074813  zone 3
+   55.  Shepherd's Bush                                    51.505228    -0.217884  zone 3
+   56.  Shepherd's Bush Market                             51.505741    -0.227355  zone 3
+   57.  Sloane Square                                      51.491533    -0.157485  zone 1
+   58.  South Kensington                                   51.494362    -0.174547  zone 2
+   59.  St John's Wood                                     51.535352    -0.174210  zone 2
+   60.  Stockwell                                          51.472211    -0.122501  zone 2
+   61.  Stratford                                          51.541251    -0.002268  zone 3
+   62.  Swiss Cottage                                      51.542292    -0.175208  zone 2
+   63.  Sydenham                                           51.427139    -0.054279  zone 4
+   64.  Tooting Bec                                        51.435366    -0.158797  zone 3
+   65.  Tooting Broadway                                   51.427191    -0.166932  zone 3
+   66.  Tottenham Court Road                               51.517651    -0.131422  zone 1
+   67.  Tower Hill                                         51.509848    -0.076699  zone 2
+   68.  Vauxhall                                           51.485663    -0.124825  zone 1
+   69.  Victoria                                           51.495052    -0.144845  zone 1
+   70.  Walthamstow Central                                51.582893    -0.019994  zone 4
+   71.  Warren Street                                      51.524949    -0.139396  zone 1
+   72.  Waterloo                                           51.503725    -0.113709  zone 1
+   73.  Wembley Park                                       51.563479    -0.279698  zone 4
+   74.  West Hampstead                                     51.546750    -0.190766  zone 3
+   75.  Westminster                                        51.501356    -0.124930  zone 1
+
+HOSPITALS (18)
+------------------------------------------------------------------------
+    1.  Barts Hospital                                     51.517531    -0.099830  zone 1
+    2.  Charing Cross Hospital                             51.486920    -0.219619  zone 3
+    3.  Chelsea and Westminster Hospital                   51.484313    -0.181343  zone 2
+    4.  Great Ormond Street Hospital                       51.522489    -0.120373  zone 1
+    5.  Guy's Hospital                                     51.503210    -0.086727  zone 1
+    6.  Homerton Hospital                                  51.550797    -0.045483  zone 3
+    7.  King's College Hospital (Denmark Hill)             51.468133    -0.093668  zone 2
+    8.  Lewisham Hospital                                  51.453036    -0.016272  zone 3
+    9.  Moorfields Eye Hospital                            51.527809    -0.090451  zone 2
+   10.  Princess Royal University Hospital                 51.366162     0.058707  zone 4
+   11.  Queen Elizabeth Hospital (Woolwich)                51.477705     0.049790  zone 4
+   12.  Royal Free Hospital                                51.552939    -0.165496  zone 2
+   13.  Royal London Hospital                              51.517503    -0.059885  zone 2
+   14.  St George's Hospital                               51.426433    -0.175836  zone 3
+   15.  St Mary's Hospital                                 51.517434    -0.174324  zone 2
+   16.  St Thomas' Hospital                                51.499065    -0.118697  zone 1
+   17.  University College Hospital                        51.524895    -0.136505  zone 1
+   18.  Whittington Hospital                               51.566457    -0.139080  zone 3
+
+SHOPPING DESTINATIONS (19)
+------------------------------------------------------------------------
+    1.  Borough Market                                     51.505581    -0.090198  zone 1
+    2.  Brick Lane Market                                  51.522616    -0.071623  zone 2
+    3.  Brixton Market                                     51.462085    -0.113072  zone 2
+    4.  Camden Market                                      51.542378    -0.147195  zone 2
+    5.  Carnaby Street                                     51.513010    -0.138669  zone 1
+    6.  Covent Garden                                      51.512873    -0.122564  zone 1
+    7.  Greenwich Market                                   51.481583    -0.009045  zone 3
+    8.  Harrods                                            51.499210    -0.162989  zone 1
+    9.  Leadenhall Market                                  51.512728    -0.083395  zone 2
+   10.  One New Change                                     51.513856    -0.095048  zone 1
+   11.  Oxford Street                                      51.514326    -0.149694  zone 1
+   12.  Petticoat Lane Market                              51.516781    -0.074901  zone 2
+   13.  Portobello Road Market                             51.516086    -0.205117  zone 2
+   14.  Ridley Road Market                                 51.548131    -0.072639  zone 2
+   15.  Roman Road Market                                  51.534922    -0.027320  zone 3
+   16.  Selfridges                                         51.514602    -0.152818  zone 1
+   17.  Spitalfields Market                                51.519650    -0.075342  zone 2
+   18.  Westfield London (Shepherd's Bush)                 51.507848    -0.221808  zone 3
+   19.  Westfield Stratford City                           51.543064    -0.006417  zone 3
+
+LANDMARKS & ATTRACTIONS (22)
+------------------------------------------------------------------------
+    1.  Barbican Centre                                    51.520651    -0.093807  zone 1
+    2.  Battersea Power Station                            51.481774    -0.144582  zone 2
+    3.  Big Ben                                            51.500704    -0.124572  zone 1
+    4.  British Museum                                     51.519312    -0.126705  zone 1
+    5.  Buckingham Palace                                  51.500835    -0.143005  zone 1
+    6.  Canary Wharf                                       51.504895    -0.019001  zone 3
+    7.  Greenwich Park                                     51.477235     0.000923  zone 3
+    8.  Hyde Park                                          51.507489    -0.162207  zone 1
+    9.  London Eye                                         51.503342    -0.119677  zone 1
+   10.  National Gallery                                   51.508881    -0.128383  zone 1
+   11.  Natural History Museum                             51.496511    -0.176002  zone 2
+   12.  Olympic Park                                       51.544960    -0.017177  zone 3
+   13.  Regent's Park                                      51.530107    -0.153769  zone 2
+   14.  Science Museum                                     51.497398    -0.174673  zone 2
+   15.  Southbank Centre                                   51.505779    -0.116787  zone 1
+   16.  St Paul's Cathedral                                51.513787    -0.098451  zone 1
+   17.  Tate Modern                                        51.507429    -0.099342  zone 1
+   18.  The O2 / Millennium Dome                           51.502937     0.003203  zone 3
+   19.  Tower Bridge                                       51.505516    -0.075367  zone 2
+   20.  Tower of London                                    51.508217    -0.076188  zone 2
+   21.  Trafalgar Square                                   51.507398    -0.128241  zone 1
+   22.  Victoria and Albert Museum                         51.496884    -0.171637  zone 2
+
+BUS DEPOTS & GARAGES (8)
+------------------------------------------------------------------------
+    1.  Brixton Bus Garage                                 51.442406    -0.123346  zone 3
+    2.  Camberwell Bus Garage                              51.473753    -0.095899  zone 2
+    3.  Holloway Bus Garage                                51.561257    -0.134332  zone 3
+    4.  Norwood Bus Garage                                 51.429144    -0.103558  zone 3
+    5.  Putney Bus Garage                                  51.462977    -0.217482  zone 3
+    6.  Stockwell Bus Garage                               51.474248    -0.124340  zone 2
+    7.  Tottenham Bus Garage                               51.589113    -0.071593  zone 3
+    8.  West Ham Bus Garage                                51.523485     0.002609  zone 3
+
+UNIVERSITIES & COLLEGES (18)
+------------------------------------------------------------------------
+    1.  Birkbeck, University of London                     51.521845    -0.130216  zone 1
+    2.  Brunel University London                           51.531852    -0.466289  zone 4
+    3.  City, University of London                         51.527657    -0.103605  zone 1
+    4.  Goldsmiths, University of London                   51.473630    -0.037246  zone 3
+    5.  Imperial College London                            51.498959    -0.175641  zone 2
+    6.  King's College London                              51.503085    -0.090002  zone 1
+    7.  Kingston University                                51.403074    -0.303218  zone 4
+    8.  London Metropolitan University                     51.517382    -0.088350  zone 1
+    9.  London School of Economics (LSE)                   51.514606    -0.116451  zone 1
+   10.  London South Bank University                       51.497703    -0.101809  zone 1
+   11.  Middlesex University                               51.659123    -0.133342  zone 4
+   12.  Queen Mary University of London                    51.524740    -0.039314  zone 3
+   13.  SOAS University of London                          51.521898    -0.128868  zone 1
+   14.  University College London (UCL)                    51.524203    -0.133001  zone 1
+   15.  University of East London                          51.507368     0.065662  zone 4
+   16.  University of Greenwich                            51.482542    -0.006653  zone 3
+   17.  University of Roehampton                           51.448532    -0.244011  zone 4
+   18.  University of Westminster                          51.520906    -0.140073  zone 1
+
+RESIDENTIAL AREAS & BOROUGHS (40)
+------------------------------------------------------------------------
+    1.  Balham                                             51.440000    -0.153500  zone 3
+    2.  Battersea                                          51.470793    -0.172214  zone 2
+    3.  Bermondsey                                         51.497012    -0.063268  zone 2
+    4.  Bow                                                51.530938    -0.027485  zone 3
+    5.  Camberwell                                         51.474571    -0.092542  zone 2
+    6.  Camden                                             51.542797    -0.162480  zone 2
+    7.  Chelsea                                            51.488855    -0.165378  zone 2
+    8.  Clapham                                            51.461447    -0.138627  zone 2
+    9.  Deptford                                           51.475845    -0.021516  zone 3
+   10.  Dulwich                                            51.441879    -0.084324  zone 3
+   11.  East Ham                                           51.533084     0.054466  zone 4
+   12.  Forest Gate                                        51.549524     0.024925  zone 4
+   13.  Fulham                                             51.474408    -0.206809  zone 3
+   14.  Greenwich                                          51.482084    -0.004542  zone 3
+   15.  Hackney                                            51.543240    -0.049362  zone 3
+   16.  Hammersmith and Fulham                             51.498314    -0.227878  zone 3
+   17.  Islington                                          51.538429    -0.099905  zone 2
+   18.  Kennington                                         51.488452    -0.109250  zone 1
+   19.  Kensington                                         51.498995    -0.199123  zone 2
+   20.  Lambeth                                            51.495211    -0.116335  zone 1
+   21.  Lewisham                                           51.462429    -0.010179  zone 3
+   22.  Mile End                                           51.525338    -0.033435  zone 3
+   23.  New Cross                                          51.474930    -0.032064  zone 3
+   24.  Notting Hill                                       51.510999    -0.205527  zone 2
+   25.  Plaistow                                           51.529380     0.024910  zone 4
+   26.  Poplar                                             51.511071    -0.014463  zone 3
+   27.  Rotherhithe                                        51.500291    -0.043632  zone 2
+   28.  Shoreditch                                         51.526669    -0.079893  zone 2
+   29.  Southwark                                          51.506135    -0.101138  zone 1
+   30.  Stepney Green                                      51.517911    -0.045519  zone 2
+   31.  Streatham                                          51.429769    -0.131110  zone 3
+   32.  Tooting                                            51.427821    -0.167967  zone 3
+   33.  Tower Hamlets                                      51.515100    -0.048400  zone 2
+   34.  Upton Park                                         51.535106     0.033984  zone 4
+   35.  Vauxhall                                           51.487483    -0.122930  zone 1
+   36.  Walworth                                           51.490114    -0.090660  zone 2
+   37.  Wandsworth                                         51.457027    -0.193261  zone 3
+   38.  Wapping                                            51.507132    -0.062015  zone 2
+   39.  Westminster                                        51.500444    -0.126540  zone 1
+   40.  Whitechapel                                        51.517486    -0.065968  zone 2
+
+BUSINESS DISTRICTS (11)
+------------------------------------------------------------------------
+    1.  Aldgate                                            51.514300    -0.072400  zone 2
+    2.  City of London (Square Mile)                       51.515618    -0.091998  zone 1
+    3.  Clerkenwell                                        51.523916    -0.109510  zone 1
+    4.  Euston Road                                        51.524718    -0.138530  zone 1
+    5.  Fleet Street                                       51.513720    -0.111923  zone 1
+    6.  Mayfair                                            51.511087    -0.147058  zone 1
+    7.  Nine Elms                                          51.480184    -0.129694  zone 2
+    8.  Paddington Basin                                   51.518429    -0.173628  zone 2
+    9.  Soho                                               51.514065    -0.135049  zone 1
+   10.  Stratford International                            51.545452    -0.006594  zone 3
+   11.  White City                                         51.511622    -0.224528  zone 3

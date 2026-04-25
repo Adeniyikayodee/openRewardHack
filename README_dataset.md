@@ -88,14 +88,16 @@ identically given the same sequence of actions.
 
 ## Sources & licensing
 
-- Road-network distances/durations: [OSRM](http://project-osrm.org/) over
-  OpenStreetMap (© OpenStreetMap contributors, ODbL). When OSRM is
-  unreachable, the builder falls back to Haversine × 1.4 — affected
-  edges are flagged in the cache.
+- Road-network distances/durations: by default the builder uses
+  Haversine × 1.4 at 30 km/h average for fast, rate-limit-free generation.
+  Setting `USE_OSRM=1` switches to live [OSRM](http://project-osrm.org/)
+  queries over OpenStreetMap (© OpenStreetMap contributors, ODbL); edges
+  that fall back after OSRM failure are flagged `"osrm_fallback": true`.
 - Weather: [Open-Meteo](https://open-meteo.com/) historical hourly archive.
-- POIs: hand-curated from
+- POIs: 220 unique London locations across zones 1–4, geocoded live via
+  [Nominatim](https://nominatim.org/) over
   [Transport for London open data](https://tfl.gov.uk/info-for/open-data-users/)
-  and OSM tags.
+  and OSM tags. No hardcoded fallbacks; see `scripts/seed_pois.py`.
 
 Released under ODbL to match upstream OpenStreetMap/TfL terms.
 

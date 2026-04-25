@@ -34,26 +34,16 @@ def traffic_task():
 @pytest.fixture
 def late_request_task():
     return load_fixture("late_request_task.json")
-=======
-"""Shared pytest fixtures for the LondonDynamicRouting test suite.
 
-Provides:
-- `fixtures_dir`: path to tests/fixtures/
-- `fixture_tasks`: dict of {fixture_id: task_spec} loaded from disk
-- `tasks_parquet_dir`: tmp dir containing a tasks.parquet built from
-  the fixtures (all re-tagged to `tutorial` so list_tasks works)
-- `server`: a running `python -m src.server` subprocess on :8080,
-  pointed at the parquet built above. Module-scoped.
-"""
-import json
+
+# ---------------------------------------------------------------------------
+# server-backed fixtures (used by test_integration / test_rollout)
+# ---------------------------------------------------------------------------
 import os
 import signal
 import subprocess
 import sys
 import time
-from pathlib import Path
-
-import pytest
 
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
@@ -88,9 +78,10 @@ def server(tasks_parquet_dir):
     """Spin up `python -m src.server` with ORWD_DATA_DIR pointing at the
     fixture-backed parquet. Module-scoped so test_integration and
     test_rollout share one server."""
-    env = {**os.environ, "ORWD_DATA_DIR": str(tasks_parquet_dir)}
+    env = {**os.environ, "ORWD_DATA_DIR": str(tasks_parquet_dir),
+           "PORT": "8080"}
     proc = subprocess.Popen(
-        ["python", "-m", "src.server"], env=env, cwd=str(ROOT),
+        ["python", "-m", "src"], env=env, cwd=str(ROOT),
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     time.sleep(4)
     if proc.poll() is not None:
