@@ -1,0 +1,234 @@
+{
+  "task_id": "london-routing-10002",
+  "difficulty": 3,
+  "split": "tutorial",
+  "actions": [
+    {
+      "turn": 0,
+      "name": "list_pending_requests",
+      "args": {},
+      "duration_s": 0.226,
+      "text_preview": "5 pending:\nr-0: 3p node 8\u21926 window pickup [0,772] dropoff [324,772] prio=1\nr-1: 1p node 8\u21925 window pickup [0,378] dropoff [0,378] prio=4 wheelchair=1\nr-2: 2p node 8\u21927 window pickup [0,423] dropoff [0,"
+    },
+    {
+      "turn": 0,
+      "name": "get_state",
+      "args": {},
+      "duration_s": 0.224,
+      "text_preview": "t=0/960\nserved=0/6\nrealized_cost=0.0 km\nVehicles:\n  v-0 [available]: []\n  v-1 [available]: []\nPending: 5"
+    },
+    {
+      "turn": 1,
+      "name": "assign",
+      "args": {
+        "request_id": "r-1",
+        "vehicle_id": "v-0",
+        "pickup_position": 0,
+        "dropoff_position": 1
+      },
+      "duration_s": 0.224,
+      "text_preview": "Assigned r-1 \u2192 v-0. Marginal: 13.94 km. Pickup ETA: 2, Dropoff ETA: 32"
+    },
+    {
+      "turn": 1,
+      "name": "assign",
+      "args": {
+        "request_id": "r-2",
+        "vehicle_id": "v-0",
+        "pickup_position": 1,
+        "dropoff_position": 2
+      },
+      "duration_s": 0.253,
+      "text_preview": "Assigned r-2 \u2192 v-0. Marginal: 3.36 km. Pickup ETA: 4, Dropoff ETA: 20"
+    },
+    {
+      "turn": 1,
+      "name": "assign",
+      "args": {
+        "request_id": "r-3",
+        "vehicle_id": "v-0",
+        "pickup_position": 2,
+        "dropoff_position": 4
+      },
+      "duration_s": 0.225,
+      "text_preview": "Assigned r-3 \u2192 v-0. Marginal: 5.78 km. Pickup ETA: 6, Dropoff ETA: 212"
+    },
+    {
+      "turn": 1,
+      "name": "assign",
+      "args": {
+        "request_id": "r-4",
+        "vehicle_id": "v-1",
+        "pickup_position": 0,
+        "dropoff_position": 1
+      },
+      "duration_s": 0.222,
+      "text_preview": "Assigned r-4 \u2192 v-1. Marginal: 25.27 km. Pickup ETA: 2, Dropoff ETA: 639"
+    },
+    {
+      "turn": 1,
+      "name": "assign",
+      "args": {
+        "request_id": "r-0",
+        "vehicle_id": "v-1",
+        "pickup_position": 1,
+        "dropoff_position": 2
+      },
+      "duration_s": 0.218,
+      "text_preview": "Assigned r-0 \u2192 v-1. Marginal: 1.05 km. Pickup ETA: 4, Dropoff ETA: 326"
+    },
+    {
+      "turn": 2,
+      "name": "tick",
+      "args": {
+        "minutes": 15
+      },
+      "duration_s": 0.241,
+      "text_preview": "t=15/960. \u0394reward: +0.000.\nt=2: picked up r-1\nt=4: picked up r-2\nt=6: picked up r-3\nt=2: picked up r-4\nt=4: picked up r-0"
+    },
+    {
+      "turn": 3,
+      "name": "list_pending_requests",
+      "args": {},
+      "duration_s": 0.227,
+      "text_preview": "No pending requests."
+    },
+    {
+      "turn": 3,
+      "name": "get_state",
+      "args": {},
+      "duration_s": 0.226,
+      "text_preview": "t=15/960\nserved=0/6\nrealized_cost=0.0 km\nVehicles:\n  v-0 [available]: [d(r-2) \u2192 d(r-3) \u2192 d(r-1)]\n  v-1 [available]: [d(r-0) \u2192 d(r-4)]\nPending: 0"
+    },
+    {
+      "turn": 4,
+      "name": "tick",
+      "args": {
+        "minutes": 210
+      },
+      "duration_s": 0.224,
+      "text_preview": "t=225/960. \u0394reward: +0.900.\nt=31: delivered r-2 (+0.400, on time)\nt=212: delivered r-3 (+0.100, on time)\nt=220: delivered r-1 (+0.400, on time)"
+    },
+    {
+      "turn": 5,
+      "name": "list_pending_requests",
+      "args": {},
+      "duration_s": 0.235,
+      "text_preview": "No pending requests."
+    },
+    {
+      "turn": 5,
+      "name": "get_state",
+      "args": {},
+      "duration_s": 0.224,
+      "text_preview": "t=225/960\nserved=3/6\nrealized_cost=0.0 km\nVehicles:\n  v-0 [available]: []\n  v-1 [available]: [d(r-0) \u2192 d(r-4)]\nPending: 0"
+    },
+    {
+      "turn": 6,
+      "name": "tick",
+      "args": {
+        "minutes": 120
+      },
+      "duration_s": 0.222,
+      "text_preview": "t=345/960. \u0394reward: +0.100.\nt=326: delivered r-0 (+0.100, on time)"
+    },
+    {
+      "turn": 7,
+      "name": "list_pending_requests",
+      "args": {},
+      "duration_s": 0.221,
+      "text_preview": "No pending requests."
+    },
+    {
+      "turn": 7,
+      "name": "get_state",
+      "args": {},
+      "duration_s": 0.226,
+      "text_preview": "t=345/960\nserved=4/6\nrealized_cost=0.0 km\nVehicles:\n  v-0 [available]: []\n  v-1 [available]: [d(r-4)]\nPending: 0"
+    },
+    {
+      "turn": 8,
+      "name": "tick",
+      "args": {
+        "minutes": 300
+      },
+      "duration_s": 0.222,
+      "text_preview": "t=645/960. \u0394reward: +0.300.\nt=639: delivered r-4 (+0.300, on time)"
+    },
+    {
+      "turn": 9,
+      "name": "list_pending_requests",
+      "args": {},
+      "duration_s": 0.22,
+      "text_preview": "No pending requests."
+    },
+    {
+      "turn": 9,
+      "name": "get_state",
+      "args": {},
+      "duration_s": 0.224,
+      "text_preview": "t=645/960\nserved=5/6\nrealized_cost=0.0 km\nVehicles:\n  v-0 [available]: []\n  v-1 [available]: []\nPending: 0"
+    },
+    {
+      "turn": 10,
+      "name": "tick",
+      "args": {
+        "minutes": 120
+      },
+      "duration_s": 0.218,
+      "text_preview": "t=765/960. \u0394reward: +0.000.\n"
+    },
+    {
+      "turn": 11,
+      "name": "list_pending_requests",
+      "args": {},
+      "duration_s": 0.234,
+      "text_preview": "No pending requests."
+    },
+    {
+      "turn": 11,
+      "name": "get_state",
+      "args": {},
+      "duration_s": 0.232,
+      "text_preview": "t=765/960\nserved=5/6\nrealized_cost=0.0 km\nVehicles:\n  v-0 [available]: []\n  v-1 [available]: []\nPending: 0"
+    },
+    {
+      "turn": 12,
+      "name": "tick",
+      "args": {
+        "minutes": 195
+      },
+      "duration_s": 0.218,
+      "text_preview": "EPISODE END (Horizon reached). Served 5/6 requests. Realized cost: 0.0 km. OR-Tools baseline: 57.7 km. Total actions: 22. Terminal reward: +0.887"
+    }
+  ],
+  "rewards": [
+    -0.005,
+    -0.005,
+    0.031206712312502476,
+    0.041674714053904306,
+    0.03928543159061227,
+    0.02,
+    0.04396277753591641,
+    -0.005,
+    -0.005,
+    -0.005,
+    0.895,
+    -0.005,
+    -0.005,
+    0.095,
+    -0.005,
+    -0.005,
+    0.29500000000000004,
+    -0.005,
+    -0.005,
+    -0.005,
+    -0.005,
+    -0.005,
+    0.8866666666666667
+  ],
+  "model": "gpt-5.4",
+  "total_reward": 2.277796302159603,
+  "finished": true,
+  "n_actions": 23
+}

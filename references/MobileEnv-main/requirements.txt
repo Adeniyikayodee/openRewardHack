@@ -1,5 +1,0 @@
-mobile-env==2.0.3
-gymnasium
-numpy
-pydantic
-openreward
