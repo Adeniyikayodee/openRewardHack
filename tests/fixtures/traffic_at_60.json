@@ -1,0 +1,49 @@
+{
+  "id": "traffic_at_60",
+  "difficulty": 3,
+  "split": "tutorial",
+  "episode_date": "2026-04-25",
+  "horizon_minutes": 480,
+  "tick_minutes": 15,
+  "depots": [
+    {"id": "depot-0", "name": "Test Depot",
+     "lat": 51.50, "lon": -0.12, "node_idx": 0}
+  ],
+  "vehicles": [
+    {"id": "v-0", "type": "minibus_16", "depot_id": "depot-0",
+     "capacity_seats": 16, "capacity_wheelchair": 1,
+     "speed_factor": 1.0, "cost_per_km": 0.85,
+     "shift_start": 0, "shift_end": 480}
+  ],
+  "requests": [
+    {"id": "r-0", "kind": "passenger",
+     "pickup_node_idx": 1, "dropoff_node_idx": 2,
+     "pickup_lat": 51.51, "pickup_lon": -0.10,
+     "dropoff_lat": 51.52, "dropoff_lon": -0.16,
+     "passengers": 3, "wheelchairs": 0,
+     "earliest_pickup": 0, "latest_pickup": 200,
+     "earliest_dropoff": 0, "latest_dropoff": 300,
+     "service_time": 2, "priority": 1, "released_at": 0}
+  ],
+  "nodes": [
+    {"idx": 0, "name": "Depot", "lat": 51.50, "lon": -0.12,
+     "zone": 1, "category": "depot"},
+    {"idx": 1, "name": "Pickup A", "lat": 51.51, "lon": -0.10,
+     "zone": 1, "category": "landmark"},
+    {"idx": 2, "name": "Dropoff A", "lat": 51.52, "lon": -0.16,
+     "zone": 1, "category": "landmark"}
+  ],
+  "distance_matrix_km":  [[0, 2, 3], [2, 0, 1], [3, 1, 0]],
+  "duration_matrix_min": [[0, 5, 8], [5, 0, 3], [8, 3, 0]],
+  "weather_timeline": [
+    {"t": 0, "precip_mm": 0, "wind_kph": 5, "visibility_km": 10, "temp_c": 15}
+  ],
+  "traffic_events": [
+    {"t_reveal": 60, "node_a": 1, "node_b": 2,
+     "speed_factor": 0.3, "reason": "test"}
+  ],
+  "dynamic_events": [],
+  "or_tools_baseline_cost": 8.0,
+  "or_tools_baseline_unserved": 0,
+  "or_tools_baseline_served": 1
+}
