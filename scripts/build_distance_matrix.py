@@ -22,9 +22,11 @@ import requests
 _CACHE_LOCK = threading.Lock()
 
 CACHE_PATH = Path("data/osrm_cache.json")
-OSRM_BASE = os.environ.get("OSRM_BASE_URL", "https://router.project-osrm.org")
-# max osrm table request: 100x100 = 10,000 cells. our largest task is ~78 nodes.
-MAX_NODES = 100
+OSRM_BASE  = os.environ.get("OSRM_BASE_URL", "https://router.project-osrm.org")
+# set USE_OSRM=1 to attempt osrm before falling back to haversine.
+# default is haversine-only so generation never stalls on rate limits.
+USE_OSRM   = os.environ.get("USE_OSRM", "0") == "1"
+MAX_NODES  = 100
 
 
 def haversine_km(a: tuple[float, float], b: tuple[float, float]) -> float:
@@ -124,14 +126,18 @@ def build_matrix(
         if key in cache:
             return cache[key]["dist_km"], cache[key]["dur_min"]
 
-    # slow fetch outside lock
-    try:
-        dist_km, dur_min = _fetch_from_osrm(coords)
-        entry: dict = {"dist_km": dist_km, "dur_min": dur_min}
-    except Exception as e:
-        if not allow_fallback:
-            raise
-        print(f"warning: osrm unavailable ({e}), using haversine fallback")
+    # slow fetch outside lock — skip osrm entirely unless USE_OSRM=1
+    if USE_OSRM:
+        try:
+            dist_km, dur_min = _fetch_from_osrm(coords)
+            entry: dict = {"dist_km": dist_km, "dur_min": dur_min}
+        except Exception as e:
+            if not allow_fallback:
+                raise
+            print(f"warning: osrm unavailable ({e}), using haversine fallback")
+            dist_km, dur_min = _haversine_fallback(coords)
+            entry = {"dist_km": dist_km, "dur_min": dur_min, "fallback": True}
+    else:
         dist_km, dur_min = _haversine_fallback(coords)
         entry = {"dist_km": dist_km, "dur_min": dur_min, "fallback": True}
 

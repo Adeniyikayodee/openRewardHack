@@ -56,17 +56,12 @@ def _dist_cb_factory(task: dict, manager):
     return cb
 
 
-def _search_params(time_limit_s: int, pdptw: bool = False):
+def _search_params(time_limit_s: int):
     params = pywrapcp.DefaultRoutingSearchParameters()
-    if pdptw:
-        # path_cheapest_arc is more stable for pickup-and-delivery problems
-        params.first_solution_strategy = (
-            routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC
-        )
-    else:
-        params.first_solution_strategy = (
-            routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION
-        )
+    # path_cheapest_arc is reliable across both cvrptw and pdptw problem sizes
+    params.first_solution_strategy = (
+        routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC
+    )
     params.local_search_metaheuristic = (
         routing_enums_pb2.LocalSearchMetaheuristic.GUIDED_LOCAL_SEARCH
     )
@@ -160,18 +155,21 @@ def _solve_cvrptw(task: dict, time_limit_s: int) -> dict:
         return max(1, int(dur[a][b] + 0.5))
 
     time_cb_idx = routing.RegisterTransitCallback(time_cb)
-    routing.AddDimension(time_cb_idx, 60, horizon, False, "Time")
+    routing.AddDimension(time_cb_idx, horizon, horizon, True, "Time")
     time_dim = routing.GetDimensionOrDie("Time")
 
     for r in task["requests"]:
         d_idx = manager.NodeToIndex(r["dropoff_node_idx"])
-        time_dim.CumulVar(d_idx).SetRange(
-            int(r["earliest_dropoff"]),
-            int(r["latest_dropoff"]),
-        )
+        e, l = int(r["earliest_dropoff"]), int(r["latest_dropoff"])
+        if e > l:
+            continue  # invalid window — leave node unconstrained, disjunction will drop it
+        try:
+            time_dim.CumulVar(d_idx).SetRange(e, l)
+        except Exception:
+            continue
         routing.AddDisjunction([d_idx], DISJUNCTION_PENALTY)
 
-    sol = routing.SolveWithParameters(_search_params(time_limit_s, pdptw=False))
+    sol = routing.SolveWithParameters(_search_params(time_limit_s))
     return _extract_result(task, routing, manager, sol)
 
 
@@ -213,21 +211,28 @@ def _solve_pdptw(task: dict, time_limit_s: int) -> dict:
         return max(1, int(dur[a][b] + 0.5))
 
     time_cb_idx = routing.RegisterTransitCallback(time_cb)
-    routing.AddDimension(time_cb_idx, 60, horizon, False, "Time")
+    routing.AddDimension(time_cb_idx, horizon, horizon, True, "Time")
     time_dim = routing.GetDimensionOrDie("Time")
 
     # pickup-and-delivery pairs
     for r in task["requests"]:
+        e_p, l_p = int(r["earliest_pickup"]),  int(r["latest_pickup"])
+        e_d, l_d = int(r["earliest_dropoff"]), int(r["latest_dropoff"])
+        if e_p > l_p or e_d > l_d:
+            continue  # invalid window — skip this request
         p = manager.NodeToIndex(r["pickup_node_idx"])
         d = manager.NodeToIndex(r["dropoff_node_idx"])
+        try:
+            time_dim.CumulVar(p).SetRange(e_p, l_p)
+            time_dim.CumulVar(d).SetRange(e_d, l_d)
+        except Exception:
+            continue
         routing.AddPickupAndDelivery(p, d)
         routing.solver().Add(routing.VehicleVar(p) == routing.VehicleVar(d))
         routing.solver().Add(time_dim.CumulVar(p) <= time_dim.CumulVar(d))
-        time_dim.CumulVar(p).SetRange(int(r["earliest_pickup"]),  int(r["latest_pickup"]))
-        time_dim.CumulVar(d).SetRange(int(r["earliest_dropoff"]), int(r["latest_dropoff"]))
         # separate disjunctions so the pair is skipped as a unit via AddPickupAndDelivery
         routing.AddDisjunction([p], DISJUNCTION_PENALTY)
         routing.AddDisjunction([d], DISJUNCTION_PENALTY)
 
-    sol = routing.SolveWithParameters(_search_params(time_limit_s, pdptw=True))
+    sol = routing.SolveWithParameters(_search_params(time_limit_s))
     return _extract_result(task, routing, manager, sol)

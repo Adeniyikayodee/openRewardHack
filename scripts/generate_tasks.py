@@ -3,14 +3,15 @@
 outputs data/tasks.jsonl (primary, one json per line) and data/tasks.parquet (derived).
 
 usage:
-    python scripts/generate_tasks.py                  # full 1,000 tasks
+    python scripts/generate_tasks.py                  # full 100 tasks
     python scripts/generate_tasks.py --quick          # 10 tutorial tasks only
+    python scripts/generate_tasks.py --n-tasks 50     # custom count
     python scripts/generate_tasks.py --workers 4      # override worker count
 
-task distribution:
-    50 tutorial  (difficulty 1-5, cycling)
-    700 train    (difficulty 1-80, linear ramp)
-    250 test     (difficulty 50-100, linear ramp)
+task distribution (100 tasks):
+    5  tutorial  (difficulty 1-5, cycling)
+    70 train     (difficulty 1-80, linear ramp)
+    25 test      (difficulty 50-100, linear ramp)
 """
 import argparse
 import json
@@ -97,15 +98,23 @@ def synthesize_vehicles(n: int, depot_id: str, heterogeneity: float,
 def synthesize_cvrptw_requests(n: int, nodes: list[dict], depot_idx: int,
                                 params: dict, rng: random.Random,
                                 horizon: int = 960) -> list[dict]:
-    """cvrptw: depot → dropoff only (no explicit pickup node)."""
+    """cvrptw: depot → dropoff only (no explicit pickup node).
+
+    each request gets a unique dropoff node so the solver can apply distinct
+    time windows without conflicts on a shared CumulVar.
+    """
     reqs = []
+    by_idx = {nd["idx"]: nd for nd in nodes}
     non_depot = [nd["idx"] for nd in nodes if nd["idx"] != depot_idx]
     if not non_depot:
         return reqs
     tw_tightness = params["tw_tightness"]
+    # sample without replacement; cap at available unique nodes
+    n = min(n, len(non_depot))
+    chosen = rng.sample(non_depot, n)
 
     for i in range(n):
-        do = rng.choice(non_depot)
+        do = chosen[i]
         passengers  = rng.choices([1, 2, 3, 4, 5, 6], [4, 3, 2, 1, 1, 1])[0]
         wheelchairs = 1 if rng.random() < 0.10 else 0
         priority    = rng.choices([1, 2, 3, 4, 5], [5, 3, 2, 1, 1])[0]
@@ -118,8 +127,8 @@ def synthesize_cvrptw_requests(n: int, nodes: list[dict], depot_idx: int,
             "id": f"r-{i}",
             "kind": "delivery",
             "dropoff_node_idx": do,
-            "dropoff_lat": nodes[do]["lat"],
-            "dropoff_lon": nodes[do]["lon"],
+            "dropoff_lat": by_idx[do]["lat"],
+            "dropoff_lon": by_idx[do]["lon"],
             "passengers":  passengers,
             "wheelchairs": wheelchairs,
             "earliest_dropoff": e_do,
@@ -134,16 +143,26 @@ def synthesize_cvrptw_requests(n: int, nodes: list[dict], depot_idx: int,
 def synthesize_pdptw_requests(n: int, nodes: list[dict], depot_idx: int,
                                params: dict, rng: random.Random,
                                horizon: int = 960) -> list[dict]:
-    """pdptw: explicit pickup + dropoff pair."""
+    """pdptw: explicit pickup + dropoff pair.
+
+    each request gets a unique pickup node and a unique dropoff node, all
+    mutually disjoint, so the solver can apply distinct time windows without
+    conflicts on a shared CumulVar.
+    """
     reqs = []
+    by_idx = {nd["idx"]: nd for nd in nodes}
     non_depot = [nd["idx"] for nd in nodes if nd["idx"] != depot_idx]
     if len(non_depot) < 2:
         return reqs
     tw_tightness = params["tw_tightness"]
+    # each pair consumes 2 unique non-depot nodes
+    max_pairs = len(non_depot) // 2
+    n = min(n, max_pairs)
+    pool = rng.sample(non_depot, 2 * n)
 
     for i in range(n):
-        pu = rng.choice(non_depot)
-        do = rng.choice([x for x in non_depot if x != pu])
+        pu = pool[2 * i]
+        do = pool[2 * i + 1]
         passengers  = rng.choices([1, 2, 3, 4, 5, 6], [4, 3, 2, 1, 1, 1])[0]
         wheelchairs = 1 if rng.random() < 0.10 else 0
         priority    = rng.choices([1, 2, 3, 4, 5], [5, 3, 2, 1, 1])[0]
@@ -159,8 +178,8 @@ def synthesize_pdptw_requests(n: int, nodes: list[dict], depot_idx: int,
             "kind": "passenger",
             "pickup_node_idx":  pu,
             "dropoff_node_idx": do,
-            "pickup_lat":  nodes[pu]["lat"], "pickup_lon":  nodes[pu]["lon"],
-            "dropoff_lat": nodes[do]["lat"], "dropoff_lon": nodes[do]["lon"],
+            "pickup_lat":  by_idx[pu]["lat"], "pickup_lon":  by_idx[pu]["lon"],
+            "dropoff_lat": by_idx[do]["lat"], "dropoff_lon": by_idx[do]["lon"],
             "passengers":  passengers,
             "wheelchairs": wheelchairs,
             "earliest_pickup":  e_pu, "latest_pickup":  l_pu,
@@ -203,13 +222,16 @@ def generate_task(seed: int, difficulty: int, split: str,
         params["n_vehicles"], "depot-0", params["heterogeneity"], rng)
 
     n_req = params["n_requests"]
+    n_dyn = params["n_dynamic_events"]
+    # reserve nodes for late requests so they don't collide with initial dropoffs
     if ttype == "pdptw":
-        # each pair needs 2 non-depot nodes; cap so the problem stays within
-        # the 3-minute solver budget
+        # each pair needs 2 unique non-depot nodes; cap so the problem stays
+        # within the 3-minute solver budget
         max_pairs = (n_nodes - 1) // 2
-        n_req = min(n_req, max_pairs, 20)
+        n_req = min(n_req, max(0, max_pairs - n_dyn), 20)
         requests = synthesize_pdptw_requests(n_req, nodes, depot_idx, params, rng)
     else:
+        n_req = min(n_req, max(0, (n_nodes - 1) - n_dyn))
         requests = synthesize_cvrptw_requests(n_req, nodes, depot_idx, params, rng)
 
     weather = synthetic_weather(params["weather_severity"])
@@ -220,26 +242,55 @@ def generate_task(seed: int, difficulty: int, split: str,
     dynamic_events = synthesize_dynamic_events(
         vehicles, requests, params["n_dynamic_events"], 960, rng, nodes=nodes)
 
-    # resolve late-request placeholder ids
+    # resolve late-request placeholder ids using only nodes not already taken
+    used_nodes: set[int] = set()
+    for r in requests:
+        if "pickup_node_idx" in r:
+            used_nodes.add(r["pickup_node_idx"])
+        used_nodes.add(r["dropoff_node_idx"])
+
     late_idx = 0
     for ev in dynamic_events:
-        if ev["type"] == "new_request":
-            new_id = f"r-late-{late_idx}"
-            late_idx += 1
-            if ttype == "cvrptw":
-                late = synthesize_cvrptw_requests(1, nodes, depot_idx, params, rng)
-            else:
-                late = synthesize_pdptw_requests(1, nodes, depot_idx, params, rng)
-            if late:
-                lr = late[0]
-                lr["id"] = new_id
-                lr["released_at"] = ev["t"]
-                if ttype == "cvrptw":
-                    lr["earliest_dropoff"] = max(lr["earliest_dropoff"], ev["t"])
-                else:
-                    lr["earliest_pickup"] = max(lr["earliest_pickup"], ev["t"])
-                requests.append(lr)
-                ev["request_id"] = new_id
+        if ev["type"] != "new_request":
+            continue
+        free_nodes = [nd for nd in nodes
+                      if nd["idx"] != depot_idx and nd["idx"] not in used_nodes]
+        needed = 2 if ttype == "pdptw" else 1
+        if len(free_nodes) < needed:
+            continue  # no room for another unique-node request
+
+        new_id = f"r-late-{late_idx}"
+        late_idx += 1
+        if ttype == "cvrptw":
+            late = synthesize_cvrptw_requests(1, free_nodes, depot_idx, params, rng)
+        else:
+            late = synthesize_pdptw_requests(1, free_nodes, depot_idx, params, rng)
+        if not late:
+            continue
+        lr = late[0]
+        lr["id"] = new_id
+        lr["released_at"] = ev["t"]
+        horizon_m = 960
+        # rebuild a valid forward-looking window starting at ev["t"]
+        if ttype == "cvrptw":
+            base_e = max(int(lr["earliest_dropoff"]), int(ev["t"]))
+            base_l = max(int(lr["latest_dropoff"]), base_e + 60)
+            lr["earliest_dropoff"] = min(base_e, horizon_m - 30)
+            lr["latest_dropoff"]   = min(base_l, horizon_m)
+            used_nodes.add(lr["dropoff_node_idx"])
+        else:
+            base_pe = max(int(lr["earliest_pickup"]), int(ev["t"]))
+            base_pl = max(int(lr["latest_pickup"]),   base_pe + 60)
+            base_de = max(int(lr["earliest_dropoff"]), base_pe + 10)
+            base_dl = max(int(lr["latest_dropoff"]),   base_de + 60)
+            lr["earliest_pickup"]  = min(base_pe, horizon_m - 90)
+            lr["latest_pickup"]    = min(base_pl, horizon_m - 30)
+            lr["earliest_dropoff"] = min(base_de, horizon_m - 60)
+            lr["latest_dropoff"]   = min(base_dl, horizon_m)
+            used_nodes.add(lr["pickup_node_idx"])
+            used_nodes.add(lr["dropoff_node_idx"])
+        requests.append(lr)
+        ev["request_id"] = new_id
 
     task: dict = {
         "id": f"london-routing-{seed:05d}",
@@ -281,18 +332,20 @@ def generate_task(seed: int, difficulty: int, split: str,
 # orchestrator
 # ---------------------------------------------------------------------------
 
-def build_plan(quick: bool) -> list[tuple[str, int, int]]:
+def build_plan(quick: bool, n_tasks: int | None = None) -> list[tuple[str, int, int]]:
     plan: list[tuple[str, int, int]] = []
     if quick:
         for i in range(10):
             plan.append(("tutorial", 10_000 + i, i % 5 + 1))
         return plan
-    for i in range(50):
+    for i in range(5):
         plan.append(("tutorial", 10_000 + i, i % 5 + 1))
-    for i in range(700):
-        plan.append(("train", 20_000 + i, 1 + (i * 79) // 699))
-    for i in range(250):
-        plan.append(("test", 30_000 + i, 50 + (i * 50) // 249))
+    for i in range(70):
+        plan.append(("train", 20_000 + i, 1 + (i * 79) // 69))
+    for i in range(25):
+        plan.append(("test", 30_000 + i, 50 + (i * 50) // 24))
+    if n_tasks is not None:
+        plan = plan[:n_tasks]
     return plan
 
 
@@ -300,6 +353,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true",
                     help="generate 10 tutorial tasks only (smoke test)")
+    ap.add_argument("--n-tasks", type=int, default=None,
+                    help="limit total tasks generated (default: full 100)")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--out-jsonl",   default="data/tasks.jsonl")
     ap.add_argument("--out-parquet", default="data/tasks.parquet")
@@ -311,7 +366,7 @@ def main() -> None:
     pois = json.loads(POI_FILE.read_text())
     print(f"loaded {len(pois)} pois from {POI_FILE}")
 
-    plan  = build_plan(args.quick)
+    plan  = build_plan(args.quick, args.n_tasks)
     total = len(plan)
     print(f"generating {total} tasks with {args.workers} workers...")
 

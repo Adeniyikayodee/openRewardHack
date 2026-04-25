@@ -59,6 +59,7 @@ def test_haversine_same_point_zero():
 # ---------------------------------------------------------------------------
 
 def test_build_matrix_uses_osrm_values(monkeypatch):
+    monkeypatch.setattr("scripts.build_distance_matrix.USE_OSRM", True)
     monkeypatch.setattr(
         "scripts.build_distance_matrix.requests.get",
         lambda url, **kw: _osrm_stub(PAIR),
@@ -113,6 +114,8 @@ def test_build_matrix_falls_back_on_osrm_failure(monkeypatch):
 
 
 def test_build_matrix_raises_when_fallback_disabled(monkeypatch):
+    monkeypatch.setattr("scripts.build_distance_matrix.USE_OSRM", True)
+
     def raise_error(url, **kw):
         raise RuntimeError("osrm down")
 
@@ -126,6 +129,7 @@ def test_build_matrix_raises_when_fallback_disabled(monkeypatch):
 # ---------------------------------------------------------------------------
 
 def test_cache_hit_skips_network(monkeypatch):
+    monkeypatch.setattr("scripts.build_distance_matrix.USE_OSRM", True)
     call_count = {"n": 0}
 
     def counting_get(url, **kw):
