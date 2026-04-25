@@ -1,0 +1,6 @@
+requests
+pandas
+pyarrow
+ortools
+huggingface_hub
+pytest
