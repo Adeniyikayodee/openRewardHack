@@ -6,12 +6,13 @@ Required env vars:
   OPENAI_API_KEY       — for executing the agent
 
 Usage:
-  # Local server (Daniel's dev loop)
+  # local server (daniel's dev loop)
   python scripts/run_rollout.py --local --task-idx 0
-  # Deployed env (demo)
-  python scripts/run_rollout.py --task-idx 0
-  # Multiple tasks, save trace
-  python scripts/run_rollout.py --n-tasks 3 --record traces/
+  # deployed env, local trace json only
+  python scripts/run_rollout.py --task-idx 0 --record traces/
+  # deployed env, recorded on the openreward platform (recommended for demos)
+  python scripts/run_rollout.py --task-idx 0 \\
+      --run-name dvr-tutorial-quickstart --record traces/
 """
 import argparse
 import asyncio
@@ -25,7 +26,7 @@ from openai import AsyncOpenAI
 from openreward import AsyncOpenReward
 
 DEFAULT_MODEL = os.environ.get("ROLLOUT_MODEL", "gpt-5.4")
-ENV_NAMESPACE = os.environ.get("OR_ENV", "EnvCommons/LondonDynamicRouting")
+ENV_NAMESPACE = os.environ.get("OR_ENV", "mkbadeniyi/DynamicVehicleRouting")
 LOCAL_BASE_URL = "http://localhost:8080"
 LOCAL_NAME = "LondonDynamicRouting"
 MAX_TURNS = 80
@@ -57,7 +58,7 @@ or you're near the horizon (t close to 960)."""
 
 
 async def run_one_task(task, environment, oai_client, model, max_turns,
-                       trace_path=None):
+                       trace_path=None, rollout=None):
     tools = await environment.list_tools(format="openai")
     OR_KEY = os.environ["OPENREWARD_API_KEY"]
     trace = {"task_id": task.task_spec["id"],
@@ -68,10 +69,15 @@ async def run_one_task(task, environment, oai_client, model, max_turns,
     async with environment.session(task=task,
                                    secrets={"api_key": OR_KEY}) as session:
         prompt = await session.get_prompt()
+        user_msg = {"role": "user", "content": prompt[0].text}
         input_list = [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt[0].text},
+            user_msg,
         ]
+        # platform recording: log only the user prompt, mirroring the
+        # reference rollout snippet (system prompt is local-only).
+        if rollout is not None:
+            rollout.log_openai_response(user_msg)
         total_reward = 0.0
         finished = False
 
@@ -80,11 +86,13 @@ async def run_one_task(task, environment, oai_client, model, max_turns,
                 response = await oai_client.responses.create(
                     model=model, tools=tools, input=input_list)
             except Exception as e:
-                print(f"  [turn {turn}] OpenAI API error: {e}")
+                print(f"  [turn {turn}] openai api error: {e}")
                 trace["actions"].append({"name": "_api_error",
                                          "error": str(e)})
                 break
 
+            if rollout is not None:
+                rollout.log_openai_response(response)
             input_list += response.output
 
             had_tool_call = False
@@ -112,25 +120,34 @@ async def run_one_task(task, environment, oai_client, model, max_turns,
                     print(f"  [t={turn:02d}] {item.name}({_short(args)}) "
                           f"→ r={reward:+.3f}, finished={finished}, "
                           f"cum={total_reward:+.3f}")
-                    input_list.append({
+                    tool_output_item = {
                         "type": "function_call_output",
-                        "call_id": item.call_id, "output": text})
+                        "call_id": item.call_id, "output": text}
+                    input_list.append(tool_output_item)
+                    if rollout is not None:
+                        rollout.log_openai_response(
+                            tool_output_item, reward=reward,
+                            is_finished=finished)
                     if finished:
                         break
                 except Exception as e:
-                    err = f"Tool failed: {type(e).__name__}: {e}"
-                    print(f"  [t={turn:02d}] {item.name} ERROR: {e}")
+                    err = f"tool failed: {type(e).__name__}: {e}"
+                    print(f"  [t={turn:02d}] {item.name} error: {e}")
                     trace["actions"].append({"turn": turn, "name": item.name,
                                              "args": args, "error": str(e)})
-                    input_list.append({
+                    err_output_item = {
                         "type": "function_call_output",
                         "call_id": item.call_id,
-                        "output": f"Tool error: {err}"})
+                        "output": f"tool error: {err}"}
+                    input_list.append(err_output_item)
+                    if rollout is not None:
+                        rollout.log_openai_response(
+                            err_output_item, reward=0.0, is_finished=False)
 
             if finished:
                 break
             if not had_tool_call:
-                print(f"  [t={turn:02d}] Model returned no tool call; "
+                print(f"  [t={turn:02d}] model returned no tool call; "
                       f"forcing submit_plan.")
                 tr = await session.call_tool("submit_plan", {})
                 total_reward += tr.reward or 0.0
@@ -141,7 +158,7 @@ async def run_one_task(task, environment, oai_client, model, max_turns,
                 break
 
         if not finished:
-            print(f"  Hit max_turns={max_turns} without termination.")
+            print(f"  hit max_turns={max_turns} without termination.")
 
     trace["total_reward"] = total_reward
     trace["finished"] = finished
@@ -170,19 +187,26 @@ async def main():
                     help="hit localhost:8080 instead of deployed env")
     ap.add_argument("--max-turns", type=int, default=MAX_TURNS)
     ap.add_argument("--record", default=None,
-                    help="directory to write trace JSONs")
+                    help="directory to write local trace JSONs")
+    ap.add_argument("--run-name", default=None,
+                    help="if set, record the rollout on the openreward "
+                         "platform under this run name")
+    ap.add_argument("--print-messages", action="store_true",
+                    help="when --run-name is set, also stream messages to "
+                         "stdout via the platform recorder")
     args = ap.parse_args()
 
     if not os.environ.get("OPENREWARD_API_KEY"):
-        print("ERROR: OPENREWARD_API_KEY not set", file=sys.stderr)
+        print("error: OPENREWARD_API_KEY not set", file=sys.stderr)
         return 2
     if not os.environ.get("OPENAI_API_KEY"):
-        print("ERROR: OPENAI_API_KEY not set", file=sys.stderr)
+        print("error: OPENAI_API_KEY not set", file=sys.stderr)
         return 2
 
     or_client = AsyncOpenReward()
     oai_client = AsyncOpenAI()
 
+    env_label = LOCAL_NAME if args.local else ENV_NAMESPACE
     if args.local:
         environment = or_client.environments.get(name=LOCAL_NAME,
                                                  base_url=LOCAL_BASE_URL)
@@ -190,31 +214,45 @@ async def main():
         environment = or_client.environments.get(name=ENV_NAMESPACE)
 
     tasks = await environment.list_tasks(split=args.split)
-    print(f"Got {len(tasks)} tasks in split '{args.split}'.")
+    print(f"got {len(tasks)} tasks in split '{args.split}' from {env_label}.")
     selected = tasks[args.task_idx:args.task_idx + args.n_tasks]
     if not selected:
-        print(f"No tasks at index {args.task_idx}")
+        print(f"no tasks at index {args.task_idx}")
         return 1
 
     results = []
     for i, task in enumerate(selected):
-        print(f"\n=== Task {args.task_idx + i}: {task.task_spec['id']} "
+        print(f"\n=== task {args.task_idx + i}: {task.task_spec['id']} "
               f"(difficulty={task.task_spec['difficulty']}) ===")
         trace_path = None
         if args.record:
             trace_path = (f"{args.record.rstrip('/')}/"
                           f"{task.task_spec['id']}.json")
+        rollout = None
+        if args.run_name:
+            # one rollout per task so each gets its own page on the hub
+            rollout = or_client.rollout.create(
+                run_name=args.run_name,
+                rollout_name=task.task_spec["id"],
+                environment=ENV_NAMESPACE if not args.local else None,
+                split=args.split,
+                print_messages=args.print_messages,
+            )
         r, f, _ = await run_one_task(task, environment, oai_client,
-                                     args.model, args.max_turns, trace_path)
+                                     args.model, args.max_turns, trace_path,
+                                     rollout=rollout)
         results.append((task.task_spec["id"],
                         task.task_spec["difficulty"], r, f))
-        print(f"=== Total reward: {r:+.3f} | finished: {f} ===")
+        print(f"=== total reward: {r:+.3f} | finished: {f} ===")
 
-    print("\n--- SUMMARY ---")
+    if args.run_name:
+        or_client.rollout.close()
+
+    print("\n--- summary ---")
     for tid, d, r, f in results:
         print(f"  {tid} (d={d}): reward={r:+.3f} finished={f}")
     avg = sum(r for _, _, r, _ in results) / len(results)
-    print(f"\nMean reward across {len(results)} tasks: {avg:+.3f}")
+    print(f"\nmean reward across {len(results)} tasks: {avg:+.3f}")
     return 0 if all(f for _, _, _, f in results) else 1
 
 
