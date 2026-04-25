@@ -1,6 +1,11 @@
-requests
+fastapi>=0.115.12
+huggingface-hub>=0.20.0
+openai>=1.40
+openreward
+ortools>=9.10
 pandas
 pyarrow
-ortools
-huggingface_hub
+pydantic>=2.0
 pytest
+requests>=2.31
+uvicorn>=0.34.3
