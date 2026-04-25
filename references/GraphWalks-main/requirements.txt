@@ -1,0 +1,7 @@
+fastapi>=0.115.12
+openreward
+pandas
+pyarrow
+uvicorn>=0.34.3
+datasets
+pydantic>=2.0.0
