@@ -26,7 +26,7 @@ def test_assign_infeasible_capacity():
 
 def test_assign_infeasible_window():
     s = make_env("tight_window_task.json")
-    ok, reason, _ = check_feasibility(s, "r-late", "v-0", 0, 1)
+    ok, reason, _ = check_feasibility(s, "r-tight", "v-0", 0, 1)
     assert not ok
     assert "window" in reason or "latest" in reason
 

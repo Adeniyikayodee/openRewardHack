@@ -37,9 +37,10 @@ def test_route_load_at_position():
     pu = Stop(request_id="r-0", kind="pickup", node_idx=1, eta_minutes=10)
     do = Stop(request_id="r-0", kind="dropoff", node_idx=2, eta_minutes=20)
     s.routes["v-0"] = [pu, do]
+    expected = s.request("r-0")["passengers"]
     assert s.route_load_at_position("v-0", 0) == 0
-    assert s.route_load_at_position("v-0", 1) == 2   # after pickup
-    assert s.route_load_at_position("v-0", 2) == 0   # after dropoff
+    assert s.route_load_at_position("v-0", 1) == expected   # after pickup
+    assert s.route_load_at_position("v-0", 2) == 0          # after dropoff
 
 
 def test_vehicle_capacity_override():
