@@ -21,8 +21,24 @@ from .time_engine import apply_tick, recompute_etas
 # ─── Task loading ─────────────────────────────────────────────────────────
 DATA_DIR = os.environ.get("ORWD_DATA_DIR", "/orwd_data")
 _TASKS_PATH = Path(DATA_DIR) / "tasks.parquet"
+
+
+def _to_py(obj):
+    """recursively convert numpy types from parquet roundtrip back to plain
+    python primitives so downstream consumers (state, feasibility, the
+    openreward serializer) see real lists / dicts."""
+    if hasattr(obj, "tolist") and not isinstance(obj, (str, bytes)):
+        return _to_py(obj.tolist())
+    if isinstance(obj, dict):
+        return {k: _to_py(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_to_py(v) for v in obj]
+    return obj
+
+
 if _TASKS_PATH.exists():
-    ALL_TASKS = pd.read_parquet(_TASKS_PATH).to_dict(orient="records")
+    ALL_TASKS = [_to_py(t)
+                 for t in pd.read_parquet(_TASKS_PATH).to_dict(orient="records")]
 else:
     ALL_TASKS = []  # tests can monkeypatch
 ALL_TASKS.sort(key=lambda t: (t["split"], t["id"]))

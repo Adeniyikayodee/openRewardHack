@@ -80,15 +80,13 @@ def _extract_result(task: dict, routing, manager, sol) -> dict:
 
     dist = task["distance_matrix_km"]
     n_vehicles = len(task["vehicles"])
-    pickup_nodes = {r["pickup_node_idx"]: r["id"] for r in task["requests"]
-                   if "pickup_node_idx" in r}
-    # for cvrptw requests use dropoff_node_idx as the served node
-    dropoff_nodes = {r["dropoff_node_idx"]: r["id"] for r in task["requests"]
-                    if "pickup_node_idx" not in r}
+    ttype = task.get("task_type", "pdptw")
 
-    served: set[str] = set()
+    # accumulate visited nodes across all routes; a request is served if the
+    # solver visits its dropoff (cvrptw) or both pickup and dropoff (pdptw).
     routes: list[list[int]] = []
     total_dist_m = 0
+    visited: set[int] = set()
 
     for v in range(n_vehicles):
         idx = routing.Start(v)
@@ -96,17 +94,24 @@ def _extract_result(task: dict, routing, manager, sol) -> dict:
         while not routing.IsEnd(idx):
             node = manager.IndexToNode(idx)
             route_nodes.append(node)
+            visited.add(node)
             next_idx = sol.Value(routing.NextVar(idx))
             if not routing.IsEnd(next_idx):
                 ni = manager.IndexToNode(next_idx)
                 total_dist_m += int(dist[node][ni] * 1000)
             idx = next_idx
         routes.append(route_nodes)
-        for node in route_nodes:
-            if node in pickup_nodes:
-                served.add(pickup_nodes[node])
-            if node in dropoff_nodes:
-                served.add(dropoff_nodes[node])
+
+    served: set[str] = set()
+    for r in task["requests"]:
+        do = r["dropoff_node_idx"]
+        if ttype == "pdptw":
+            pu = r["pickup_node_idx"]
+            if pu in visited and do in visited:
+                served.add(r["id"])
+        else:
+            if do in visited:
+                served.add(r["id"])
 
     n_served = len(served)
     n_unserved = len(task["requests"]) - n_served

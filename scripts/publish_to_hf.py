@@ -22,6 +22,8 @@ def main() -> None:
                     help="hf repo id, e.g. your-username/london-dynamic-routing")
     ap.add_argument("--jsonl",   default="data/tasks.jsonl")
     ap.add_argument("--parquet", default="data/tasks.parquet")
+    ap.add_argument("--card",    default="README_dataset.md",
+                    help="dataset card to upload as README.md")
     ap.add_argument("--public",  action="store_true",
                     help="make the repo public (default: private)")
     ap.add_argument("--commit-message", default="add london-dynamic-routing dataset")
@@ -29,6 +31,7 @@ def main() -> None:
 
     jsonl_path   = Path(args.jsonl)
     parquet_path = Path(args.parquet)
+    card_path    = Path(args.card)
 
     for p in (jsonl_path, parquet_path):
         if not p.exists():
@@ -58,10 +61,17 @@ def main() -> None:
         print(f"error creating repo: {e}", file=sys.stderr)
         sys.exit(1)
 
-    for local_path, repo_path in [
+    upload_plan = [
         (jsonl_path,   "data/tasks.jsonl"),
         (parquet_path, "data/tasks.parquet"),
-    ]:
+    ]
+    if card_path.exists():
+        upload_plan.append((card_path, "README.md"))
+    else:
+        print(f"warning: {card_path} not found; skipping dataset card upload",
+              file=sys.stderr)
+
+    for local_path, repo_path in upload_plan:
         print(f"uploading {local_path} → {args.repo}/{repo_path} ...")
         try:
             api.upload_file(

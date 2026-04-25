@@ -97,17 +97,26 @@ def synthesize_vehicles(n: int, depot_id: str, heterogeneity: float,
 
 def synthesize_cvrptw_requests(n: int, nodes: list[dict], depot_idx: int,
                                 params: dict, rng: random.Random,
-                                horizon: int = 960) -> list[dict]:
+                                horizon: int = 960,
+                                depot_node: dict | None = None) -> list[dict]:
     """cvrptw: depot → dropoff. modelled in the unified TaskSpec as a
     pickup-at-depot + dropoff request so the runtime treats every request
     identically.
 
     each request gets a unique dropoff node so the solver can apply distinct
     time windows without conflicts on a shared CumulVar.
+
+    `depot_node` is optional metadata for the depot's coords; required when
+    `nodes` does not contain the depot (e.g. when called with `free_nodes`
+    for late request synthesis).
     """
     reqs = []
     by_idx = {nd["idx"]: nd for nd in nodes}
-    depot_nd = by_idx[depot_idx]
+    if depot_node is None:
+        depot_node = by_idx.get(depot_idx)
+        if depot_node is None:
+            raise ValueError("depot_node required when nodes does not include "
+                             "the depot")
     non_depot = [nd["idx"] for nd in nodes if nd["idx"] != depot_idx]
     if not non_depot:
         return reqs
@@ -135,7 +144,7 @@ def synthesize_cvrptw_requests(n: int, nodes: list[dict], depot_idx: int,
             "kind": "parcel",
             "pickup_node_idx":  depot_idx,
             "dropoff_node_idx": do,
-            "pickup_lat":  depot_nd["lat"], "pickup_lon":  depot_nd["lon"],
+            "pickup_lat":  depot_node["lat"], "pickup_lon":  depot_node["lon"],
             "dropoff_lat": by_idx[do]["lat"],
             "dropoff_lon": by_idx[do]["lon"],
             "passengers":  passengers,
@@ -271,7 +280,8 @@ def generate_task(seed: int, difficulty: int, split: str,
         new_id = f"r-late-{late_idx}"
         late_idx += 1
         if ttype == "cvrptw":
-            late = synthesize_cvrptw_requests(1, free_nodes, depot_idx, params, rng)
+            late = synthesize_cvrptw_requests(1, free_nodes, depot_idx, params,
+                                              rng, depot_node=depot_nd)
         else:
             late = synthesize_pdptw_requests(1, free_nodes, depot_idx, params, rng)
         if not late:
