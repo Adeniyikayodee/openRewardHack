@@ -9,3 +9,4 @@ requests>=2.31
 huggingface-hub>=0.20.0
 openai>=1.40
 pytest
+

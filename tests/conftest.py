@@ -34,3 +34,84 @@ def traffic_task():
 @pytest.fixture
 def late_request_task():
     return load_fixture("late_request_task.json")
+=======
+"""Shared pytest fixtures for the LondonDynamicRouting test suite.
+
+Provides:
+- `fixtures_dir`: path to tests/fixtures/
+- `fixture_tasks`: dict of {fixture_id: task_spec} loaded from disk
+- `tasks_parquet_dir`: tmp dir containing a tasks.parquet built from
+  the fixtures (all re-tagged to `tutorial` so list_tasks works)
+- `server`: a running `python -m src.server` subprocess on :8080,
+  pointed at the parquet built above. Module-scoped.
+"""
+import json
+import os
+import signal
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(ROOT))
+
+
+@pytest.fixture(scope="session")
+def fixtures_dir() -> Path:
+    return Path(__file__).parent / "fixtures"
+
+
+@pytest.fixture(scope="session")
+def fixture_tasks(fixtures_dir):
+    tasks = {}
+    for f in sorted(fixtures_dir.glob("*.json")):
+        spec = json.loads(f.read_text())
+        tasks[spec["id"]] = spec
+    return tasks
+
+
+@pytest.fixture(scope="session")
+def tasks_parquet_dir(tmp_path_factory, fixture_tasks):
+    """Build a tasks.parquet file from the fixture set in a tmp dir."""
+    import pandas as pd
+    rows = [{**spec, "split": "tutorial"} for spec in fixture_tasks.values()]
+    data_dir = tmp_path_factory.mktemp("orwd_data")
+    pd.DataFrame(rows).to_parquet(data_dir / "tasks.parquet")
+    return data_dir
+
+
+@pytest.fixture(scope="module")
+def server(tasks_parquet_dir):
+    """Spin up `python -m src.server` with ORWD_DATA_DIR pointing at the
+    fixture-backed parquet. Module-scoped so test_integration and
+    test_rollout share one server."""
+    env = {**os.environ, "ORWD_DATA_DIR": str(tasks_parquet_dir)}
+    proc = subprocess.Popen(
+        ["python", "-m", "src.server"], env=env, cwd=str(ROOT),
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    time.sleep(4)
+    if proc.poll() is not None:
+        err = (proc.stderr.read(2000).decode(errors="replace")
+               if proc.stderr else "")
+        pytest.fail(f"server failed to start: {err}")
+    yield proc
+    proc.send_signal(signal.SIGTERM)
+    try:
+        proc.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+
+
+@pytest.fixture(scope="session")
+def required_task_keys():
+    return {
+        "id", "difficulty", "split", "episode_date", "horizon_minutes",
+        "tick_minutes", "depots", "vehicles", "requests", "nodes",
+        "distance_matrix_km", "duration_matrix_min", "weather_timeline",
+        "traffic_events", "dynamic_events",
+        "or_tools_baseline_cost", "or_tools_baseline_unserved",
+        "or_tools_baseline_served",
+    }
