@@ -1,0 +1,1542 @@
+[
+  {
+    "name": "King's Cross St Pancras station London",
+    "lat": 51.530609,
+    "lon": -0.1239491,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Westminster station London",
+    "lat": 51.5013562,
+    "lon": -0.1249302,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Bank station London",
+    "lat": 51.5134288,
+    "lon": -0.088689,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Oxford Circus station London",
+    "lat": 51.5154418,
+    "lon": -0.1419563,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Liverpool Street station London",
+    "lat": 51.5172636,
+    "lon": -0.0805711,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Victoria station London",
+    "lat": 51.4950525,
+    "lon": -0.1448455,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Waterloo station London",
+    "lat": 51.5037251,
+    "lon": -0.1137089,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "London Bridge station London",
+    "lat": 51.5048764,
+    "lon": -0.0851473,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Paddington station London",
+    "lat": 51.5155439,
+    "lon": -0.1755506,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Euston station London",
+    "lat": 51.5288526,
+    "lon": -0.1341909,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Canary Wharf station London",
+    "lat": 51.5028244,
+    "lon": -0.0179787,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Bond Street station London",
+    "lat": 51.5142559,
+    "lon": -0.1497856,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Knightsbridge station London",
+    "lat": 51.5008494,
+    "lon": -0.1601499,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Notting Hill Gate station London",
+    "lat": 51.5089252,
+    "lon": -0.1961978,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Camden Town station London",
+    "lat": 51.5393983,
+    "lon": -0.1415573,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Angel station London",
+    "lat": 51.5324874,
+    "lon": -0.1060356,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Old Street station London",
+    "lat": 51.5256284,
+    "lon": -0.0876094,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Brixton station London",
+    "lat": 51.4616615,
+    "lon": -0.115322,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Stockwell station London",
+    "lat": 51.472211,
+    "lon": -0.1225014,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Clapham Common station London",
+    "lat": 51.4615284,
+    "lon": -0.1384969,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Hammersmith station London",
+    "lat": 51.4926558,
+    "lon": -0.2238391,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Earl's Court station London",
+    "lat": 51.4916123,
+    "lon": -0.193903,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Shepherd's Bush station London",
+    "lat": 51.505228,
+    "lon": -0.2178837,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Wembley Park station London",
+    "lat": 51.5634786,
+    "lon": -0.2796983,
+    "zone": 4,
+    "category": "tube_station"
+  },
+  {
+    "name": "Stratford station London",
+    "lat": 51.5412507,
+    "lon": -0.0022679,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Greenwich station London",
+    "lat": 51.47825,
+    "lon": -0.0114361,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Putney Bridge station London",
+    "lat": 51.4687259,
+    "lon": -0.2102924,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Walthamstow Central station London",
+    "lat": 51.582893,
+    "lon": -0.0199941,
+    "zone": 4,
+    "category": "tube_station"
+  },
+  {
+    "name": "Elephant and Castle station London",
+    "lat": 51.5052434,
+    "lon": -0.0849181,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Bethnal Green station London",
+    "lat": 51.5274517,
+    "lon": -0.0567456,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Mile End station London",
+    "lat": 51.5253494,
+    "lon": -0.0332119,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Canning Town station London",
+    "lat": 51.5131567,
+    "lon": 0.0101161,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Tottenham Court Road station London",
+    "lat": 51.5176512,
+    "lon": -0.1314219,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Holborn station London",
+    "lat": 51.517682,
+    "lon": -0.1184106,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Farringdon station London",
+    "lat": 51.5204993,
+    "lon": -0.1060483,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Moorgate station London",
+    "lat": 51.5182516,
+    "lon": -0.0890625,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Aldgate station London",
+    "lat": 51.5142477,
+    "lon": -0.0757186,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Tower Hill station London",
+    "lat": 51.5098481,
+    "lon": -0.0766986,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Blackfriars station London",
+    "lat": 51.5104871,
+    "lon": -0.1032417,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Embankment station London",
+    "lat": 51.5081627,
+    "lon": -0.1211473,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Leicester Square station London",
+    "lat": 51.5115954,
+    "lon": -0.1282835,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Piccadilly Circus station London",
+    "lat": 51.5098192,
+    "lon": -0.1345484,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Green Park station London",
+    "lat": 51.5072919,
+    "lon": -0.1437229,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Sloane Square station London",
+    "lat": 51.4915333,
+    "lon": -0.1574849,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "South Kensington station London",
+    "lat": 51.4943621,
+    "lon": -0.1745469,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Dalston Junction station London",
+    "lat": 51.5453006,
+    "lon": -0.0756094,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Highbury and Islington station London",
+    "lat": 51.5461059,
+    "lon": -0.1036336,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Finsbury Park station London",
+    "lat": 51.5648095,
+    "lon": -0.1063911,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Seven Sisters station London",
+    "lat": 51.5825786,
+    "lon": -0.0748133,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Shepherd's Bush Market station London",
+    "lat": 51.5057411,
+    "lon": -0.2273551,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Kensal Rise station London",
+    "lat": 51.5344054,
+    "lon": -0.2191722,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Kilburn High Road station London",
+    "lat": 51.5378615,
+    "lon": -0.1931964,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "West Hampstead station London",
+    "lat": 51.5467503,
+    "lon": -0.1907661,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Swiss Cottage station London",
+    "lat": 51.5424201,
+    "lon": -0.1751727,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "St John's Wood station London",
+    "lat": 51.5353523,
+    "lon": -0.1742097,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Edgware Road station London",
+    "lat": 51.5198543,
+    "lon": -0.167917,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Baker Street station London",
+    "lat": 51.5225853,
+    "lon": -0.1567431,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Great Portland Street station London",
+    "lat": 51.5229962,
+    "lon": -0.1439454,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Warren Street station London",
+    "lat": 51.5249495,
+    "lon": -0.1393963,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Goodge Street station London",
+    "lat": 51.5205132,
+    "lon": -0.1345803,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Covent Garden station London",
+    "lat": 51.5129611,
+    "lon": -0.1241901,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Vauxhall station London",
+    "lat": 51.485663,
+    "lon": -0.1248249,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Kennington station London",
+    "lat": 51.4882204,
+    "lon": -0.1054988,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Oval station London",
+    "lat": 51.4824965,
+    "lon": -0.1128748,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "Tooting Broadway station London",
+    "lat": 51.4271912,
+    "lon": -0.1669323,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Tooting Bec station London",
+    "lat": 51.4353655,
+    "lon": -0.1587971,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Balham station London",
+    "lat": 51.4428954,
+    "lon": -0.1517368,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Clapham North station London",
+    "lat": 51.4647076,
+    "lon": -0.1292909,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "Clapham South station London",
+    "lat": 51.4529021,
+    "lon": -0.1485537,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Peckham Rye station London",
+    "lat": 51.4692572,
+    "lon": -0.0678717,
+    "zone": 2,
+    "category": "tube_station"
+  },
+  {
+    "name": "New Cross station London",
+    "lat": 51.4756875,
+    "lon": -0.0311729,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Deptford station London",
+    "lat": 51.4789824,
+    "lon": -0.0266353,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Lewisham station London",
+    "lat": 51.4652194,
+    "lon": -0.0122601,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Forest Hill station London",
+    "lat": 51.4392419,
+    "lon": -0.0530903,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Sydenham station London",
+    "lat": 51.4271388,
+    "lon": -0.0542794,
+    "zone": 4,
+    "category": "tube_station"
+  },
+  {
+    "name": "Kilburn station London",
+    "lat": 51.5469317,
+    "lon": -0.2042909,
+    "zone": 3,
+    "category": "tube_station"
+  },
+  {
+    "name": "Marylebone station London",
+    "lat": 51.5226092,
+    "lon": -0.1631475,
+    "zone": 1,
+    "category": "tube_station"
+  },
+  {
+    "name": "St Thomas' Hospital London",
+    "lat": 51.4990645,
+    "lon": -0.1186968,
+    "zone": 1,
+    "category": "hospital"
+  },
+  {
+    "name": "Guy's Hospital London",
+    "lat": 51.5032099,
+    "lon": -0.0867273,
+    "zone": 1,
+    "category": "hospital"
+  },
+  {
+    "name": "King's College Hospital Denmark Hill London",
+    "lat": 51.4681331,
+    "lon": -0.0936682,
+    "zone": 2,
+    "category": "hospital"
+  },
+  {
+    "name": "St Mary's Hospital London",
+    "lat": 51.517434,
+    "lon": -0.1743245,
+    "zone": 2,
+    "category": "hospital"
+  },
+  {
+    "name": "Royal Free Hospital London",
+    "lat": 51.5529389,
+    "lon": -0.1654964,
+    "zone": 2,
+    "category": "hospital"
+  },
+  {
+    "name": "University College Hospital London",
+    "lat": 51.5248954,
+    "lon": -0.136505,
+    "zone": 1,
+    "category": "hospital"
+  },
+  {
+    "name": "Royal London Hospital London",
+    "lat": 51.5175027,
+    "lon": -0.0598851,
+    "zone": 2,
+    "category": "hospital"
+  },
+  {
+    "name": "Lewisham Hospital London",
+    "lat": 51.4530361,
+    "lon": -0.0162724,
+    "zone": 3,
+    "category": "hospital"
+  },
+  {
+    "name": "Whittington Hospital London",
+    "lat": 51.5664571,
+    "lon": -0.1390803,
+    "zone": 3,
+    "category": "hospital"
+  },
+  {
+    "name": "Homerton Hospital London",
+    "lat": 51.5507966,
+    "lon": -0.0454834,
+    "zone": 3,
+    "category": "hospital"
+  },
+  {
+    "name": "Chelsea and Westminster Hospital London",
+    "lat": 51.4843131,
+    "lon": -0.1813433,
+    "zone": 2,
+    "category": "hospital"
+  },
+  {
+    "name": "Charing Cross Hospital London",
+    "lat": 51.4869204,
+    "lon": -0.2196194,
+    "zone": 3,
+    "category": "hospital"
+  },
+  {
+    "name": "Barts Hospital London",
+    "lat": 51.5175315,
+    "lon": -0.0998302,
+    "zone": 1,
+    "category": "hospital"
+  },
+  {
+    "name": "Great Ormond Street Hospital London",
+    "lat": 51.5224889,
+    "lon": -0.1203728,
+    "zone": 1,
+    "category": "hospital"
+  },
+  {
+    "name": "Moorfields Eye Hospital London",
+    "lat": 51.5278088,
+    "lon": -0.0904506,
+    "zone": 2,
+    "category": "hospital"
+  },
+  {
+    "name": "St George's Hospital London",
+    "lat": 51.426433,
+    "lon": -0.175836,
+    "zone": 3,
+    "category": "hospital"
+  },
+  {
+    "name": "Queen Elizabeth Hospital Woolwich London",
+    "lat": 51.4777046,
+    "lon": 0.0497901,
+    "zone": 4,
+    "category": "hospital"
+  },
+  {
+    "name": "Princess Royal University Hospital London",
+    "lat": 51.3661619,
+    "lon": 0.0587065,
+    "zone": 4,
+    "category": "hospital"
+  },
+  {
+    "name": "Westfield London Shepherd's Bush",
+    "lat": 51.5078484,
+    "lon": -0.221808,
+    "zone": 3,
+    "category": "shopping"
+  },
+  {
+    "name": "Westfield Stratford City London",
+    "lat": 51.5430642,
+    "lon": -0.0064165,
+    "zone": 3,
+    "category": "shopping"
+  },
+  {
+    "name": "Selfridges London",
+    "lat": 51.5146022,
+    "lon": -0.1528176,
+    "zone": 1,
+    "category": "shopping"
+  },
+  {
+    "name": "Harrods London",
+    "lat": 51.4992104,
+    "lon": -0.1629893,
+    "zone": 1,
+    "category": "shopping"
+  },
+  {
+    "name": "Borough Market London",
+    "lat": 51.5055815,
+    "lon": -0.0901984,
+    "zone": 1,
+    "category": "shopping"
+  },
+  {
+    "name": "Camden Market London",
+    "lat": 51.5423781,
+    "lon": -0.1471949,
+    "zone": 2,
+    "category": "shopping"
+  },
+  {
+    "name": "Brick Lane Market London",
+    "lat": 51.5226161,
+    "lon": -0.0716229,
+    "zone": 2,
+    "category": "shopping"
+  },
+  {
+    "name": "Covent Garden London",
+    "lat": 51.5128732,
+    "lon": -0.1225639,
+    "zone": 1,
+    "category": "shopping"
+  },
+  {
+    "name": "Brixton Market London",
+    "lat": 51.4620845,
+    "lon": -0.1130724,
+    "zone": 2,
+    "category": "shopping"
+  },
+  {
+    "name": "Oxford Street London",
+    "lat": 51.5143256,
+    "lon": -0.1496938,
+    "zone": 1,
+    "category": "shopping"
+  },
+  {
+    "name": "Carnaby Street London",
+    "lat": 51.5130102,
+    "lon": -0.1386688,
+    "zone": 1,
+    "category": "shopping"
+  },
+  {
+    "name": "Spitalfields Market London",
+    "lat": 51.5196499,
+    "lon": -0.0753423,
+    "zone": 2,
+    "category": "shopping"
+  },
+  {
+    "name": "Portobello Road Market London",
+    "lat": 51.5160858,
+    "lon": -0.2051174,
+    "zone": 2,
+    "category": "shopping"
+  },
+  {
+    "name": "Greenwich Market London",
+    "lat": 51.4815833,
+    "lon": -0.0090449,
+    "zone": 3,
+    "category": "shopping"
+  },
+  {
+    "name": "One New Change London",
+    "lat": 51.5138561,
+    "lon": -0.0950481,
+    "zone": 1,
+    "category": "shopping"
+  },
+  {
+    "name": "Leadenhall Market London",
+    "lat": 51.5127276,
+    "lon": -0.0833953,
+    "zone": 2,
+    "category": "shopping"
+  },
+  {
+    "name": "Petticoat Lane Market London",
+    "lat": 51.5167811,
+    "lon": -0.0749006,
+    "zone": 2,
+    "category": "shopping"
+  },
+  {
+    "name": "Ridley Road Market Hackney London",
+    "lat": 51.5481313,
+    "lon": -0.0726387,
+    "zone": 2,
+    "category": "shopping"
+  },
+  {
+    "name": "Roman Road Market Bow London",
+    "lat": 51.5349219,
+    "lon": -0.02732,
+    "zone": 3,
+    "category": "shopping"
+  },
+  {
+    "name": "Tower of London",
+    "lat": 51.508217,
+    "lon": -0.0761879,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "British Museum London",
+    "lat": 51.5193118,
+    "lon": -0.1267051,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Natural History Museum London",
+    "lat": 51.4965109,
+    "lon": -0.1760019,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "Tate Modern London",
+    "lat": 51.5074293,
+    "lon": -0.0993416,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "London Eye London",
+    "lat": 51.5033416,
+    "lon": -0.1196765,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Big Ben London",
+    "lat": 51.5007042,
+    "lon": -0.1245721,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Buckingham Palace London",
+    "lat": 51.5008349,
+    "lon": -0.1430045,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Trafalgar Square London",
+    "lat": 51.5073978,
+    "lon": -0.1282407,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Hyde Park London",
+    "lat": 51.5074889,
+    "lon": -0.1622074,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Regent's Park London",
+    "lat": 51.530107,
+    "lon": -0.1537691,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "St Paul's Cathedral London",
+    "lat": 51.5137872,
+    "lon": -0.0984506,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Greenwich Park London",
+    "lat": 51.4772355,
+    "lon": 0.0009227,
+    "zone": 3,
+    "category": "landmark"
+  },
+  {
+    "name": "Victoria and Albert Museum London",
+    "lat": 51.4968838,
+    "lon": -0.1716372,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "Science Museum London",
+    "lat": 51.4973983,
+    "lon": -0.1746726,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "National Gallery London",
+    "lat": 51.508881,
+    "lon": -0.1283826,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Barbican Centre London",
+    "lat": 51.5206514,
+    "lon": -0.0938065,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Southbank Centre London",
+    "lat": 51.5057791,
+    "lon": -0.116787,
+    "zone": 1,
+    "category": "landmark"
+  },
+  {
+    "name": "Queen Elizabeth Olympic Park London",
+    "lat": 51.54496,
+    "lon": -0.0171772,
+    "zone": 3,
+    "category": "landmark"
+  },
+  {
+    "name": "Battersea Power Station London",
+    "lat": 51.4817738,
+    "lon": -0.1445821,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "The O2 Arena London",
+    "lat": 51.5029316,
+    "lon": 0.0031839,
+    "zone": 3,
+    "category": "landmark"
+  },
+  {
+    "name": "Tower Bridge London",
+    "lat": 51.5055158,
+    "lon": -0.0753665,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "Canary Wharf London",
+    "lat": 51.5048954,
+    "lon": -0.0190006,
+    "zone": 3,
+    "category": "landmark"
+  },
+  {
+    "name": "Wembley Stadium London",
+    "lat": 51.5560695,
+    "lon": -0.2796034,
+    "zone": 4,
+    "category": "landmark"
+  },
+  {
+    "name": "Emirates Stadium London",
+    "lat": 51.5550404,
+    "lon": -0.1083997,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "Stamford Bridge Chelsea London",
+    "lat": 51.4809107,
+    "lon": -0.1883279,
+    "zone": 2,
+    "category": "landmark"
+  },
+  {
+    "name": "Stockwell Bus Garage London",
+    "lat": 51.4742479,
+    "lon": -0.1243397,
+    "zone": 2,
+    "category": "depot"
+  },
+  {
+    "name": "Holloway Bus Garage London",
+    "lat": 51.5612574,
+    "lon": -0.1343319,
+    "zone": 3,
+    "category": "depot"
+  },
+  {
+    "name": "West Ham Bus Garage London",
+    "lat": 51.5234846,
+    "lon": 0.0026094,
+    "zone": 3,
+    "category": "depot"
+  },
+  {
+    "name": "Norwood Bus Garage London",
+    "lat": 51.4291443,
+    "lon": -0.1035579,
+    "zone": 3,
+    "category": "depot"
+  },
+  {
+    "name": "Camberwell Bus Garage London",
+    "lat": 51.4737534,
+    "lon": -0.0958986,
+    "zone": 2,
+    "category": "depot"
+  },
+  {
+    "name": "Brixton Bus Garage London",
+    "lat": 51.442406,
+    "lon": -0.1233458,
+    "zone": 3,
+    "category": "depot"
+  },
+  {
+    "name": "Putney Bus Garage London",
+    "lat": 51.4629767,
+    "lon": -0.2174823,
+    "zone": 3,
+    "category": "depot"
+  },
+  {
+    "name": "Tottenham Bus Garage London",
+    "lat": 51.5891134,
+    "lon": -0.0715933,
+    "zone": 3,
+    "category": "depot"
+  },
+  {
+    "name": "University College London",
+    "lat": 51.5242031,
+    "lon": -0.1330007,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "King's College London Strand",
+    "lat": 51.5114753,
+    "lon": -0.1161094,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "Imperial College London",
+    "lat": 51.4989595,
+    "lon": -0.1756407,
+    "zone": 2,
+    "category": "school"
+  },
+  {
+    "name": "London School of Economics London",
+    "lat": 51.5146063,
+    "lon": -0.1164509,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "Queen Mary University of London",
+    "lat": 51.5247403,
+    "lon": -0.0393136,
+    "zone": 3,
+    "category": "school"
+  },
+  {
+    "name": "City University of London",
+    "lat": 51.5276574,
+    "lon": -0.103605,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "Goldsmiths University of London",
+    "lat": 51.4736302,
+    "lon": -0.0372464,
+    "zone": 3,
+    "category": "school"
+  },
+  {
+    "name": "SOAS University of London",
+    "lat": 51.5218979,
+    "lon": -0.1288676,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "Birkbeck University of London",
+    "lat": 51.5218449,
+    "lon": -0.1302155,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "University of Westminster London",
+    "lat": 51.5209064,
+    "lon": -0.140073,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "London Metropolitan University",
+    "lat": 51.5173823,
+    "lon": -0.0883496,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "London South Bank University",
+    "lat": 51.4977032,
+    "lon": -0.1018089,
+    "zone": 1,
+    "category": "school"
+  },
+  {
+    "name": "Brunel University London",
+    "lat": 51.5318525,
+    "lon": -0.4662887,
+    "zone": 4,
+    "category": "school"
+  },
+  {
+    "name": "University of East London",
+    "lat": 51.5073682,
+    "lon": 0.0656624,
+    "zone": 4,
+    "category": "school"
+  },
+  {
+    "name": "University of Greenwich London",
+    "lat": 51.4825423,
+    "lon": -0.0066531,
+    "zone": 3,
+    "category": "school"
+  },
+  {
+    "name": "Middlesex University London",
+    "lat": 51.6591227,
+    "lon": -0.1333415,
+    "zone": 4,
+    "category": "school"
+  },
+  {
+    "name": "University of Roehampton London",
+    "lat": 51.4485315,
+    "lon": -0.2440107,
+    "zone": 4,
+    "category": "school"
+  },
+  {
+    "name": "Kingston University London",
+    "lat": 51.4030739,
+    "lon": -0.3032181,
+    "zone": 4,
+    "category": "school"
+  },
+  {
+    "name": "Islington London",
+    "lat": 51.5384287,
+    "lon": -0.0999051,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Hackney London",
+    "lat": 51.5432402,
+    "lon": -0.0493621,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Camden London",
+    "lat": 51.5427966,
+    "lon": -0.1624803,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Lambeth London",
+    "lat": 51.4952111,
+    "lon": -0.1163354,
+    "zone": 1,
+    "category": "residential"
+  },
+  {
+    "name": "Southwark London",
+    "lat": 51.5061349,
+    "lon": -0.1011379,
+    "zone": 1,
+    "category": "residential"
+  },
+  {
+    "name": "Tower Hamlets London",
+    "lat": 51.508217,
+    "lon": -0.0761879,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Wandsworth London",
+    "lat": 51.4570271,
+    "lon": -0.1932607,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Lewisham London",
+    "lat": 51.4624292,
+    "lon": -0.0101787,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Greenwich London",
+    "lat": 51.4820845,
+    "lon": -0.0045417,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Hammersmith and Fulham London",
+    "lat": 51.4983142,
+    "lon": -0.2278782,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Kensington London",
+    "lat": 51.4989948,
+    "lon": -0.1991229,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Chelsea London",
+    "lat": 51.4888554,
+    "lon": -0.1653781,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Westminster London",
+    "lat": 51.5004439,
+    "lon": -0.1265398,
+    "zone": 1,
+    "category": "residential"
+  },
+  {
+    "name": "Fulham London",
+    "lat": 51.474408,
+    "lon": -0.206809,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Notting Hill London",
+    "lat": 51.5109995,
+    "lon": -0.2055267,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Shoreditch London",
+    "lat": 51.5266694,
+    "lon": -0.0798926,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Bermondsey London",
+    "lat": 51.4970125,
+    "lon": -0.063268,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Rotherhithe London",
+    "lat": 51.5002908,
+    "lon": -0.0436321,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Poplar London",
+    "lat": 51.5110713,
+    "lon": -0.0144629,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Deptford London",
+    "lat": 51.4758453,
+    "lon": -0.0215164,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "New Cross London",
+    "lat": 51.4749303,
+    "lon": -0.0320638,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Camberwell London",
+    "lat": 51.4745706,
+    "lon": -0.0925416,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Dulwich London",
+    "lat": 51.4418786,
+    "lon": -0.0843244,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Streatham London",
+    "lat": 51.429769,
+    "lon": -0.1311105,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Tooting London",
+    "lat": 51.4278214,
+    "lon": -0.1679667,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Balham London",
+    "lat": 51.4428954,
+    "lon": -0.1517368,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Clapham London",
+    "lat": 51.4614469,
+    "lon": -0.138627,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Battersea London",
+    "lat": 51.4707933,
+    "lon": -0.172214,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Vauxhall London",
+    "lat": 51.4874834,
+    "lon": -0.1229297,
+    "zone": 1,
+    "category": "residential"
+  },
+  {
+    "name": "Kennington London",
+    "lat": 51.4884523,
+    "lon": -0.1092504,
+    "zone": 1,
+    "category": "residential"
+  },
+  {
+    "name": "Walworth London",
+    "lat": 51.4901142,
+    "lon": -0.0906603,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Whitechapel London",
+    "lat": 51.5174861,
+    "lon": -0.0659685,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Wapping London",
+    "lat": 51.5071316,
+    "lon": -0.0620152,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Stepney Green London",
+    "lat": 51.5179108,
+    "lon": -0.0455187,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "Bow London",
+    "lat": 51.5309383,
+    "lon": -0.0274853,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Forest Gate London",
+    "lat": 51.5495236,
+    "lon": 0.0249248,
+    "zone": 4,
+    "category": "residential"
+  },
+  {
+    "name": "Plaistow London",
+    "lat": 51.5293798,
+    "lon": 0.0249097,
+    "zone": 4,
+    "category": "residential"
+  },
+  {
+    "name": "Upton Park London",
+    "lat": 51.5351062,
+    "lon": 0.0339842,
+    "zone": 4,
+    "category": "residential"
+  },
+  {
+    "name": "East Ham London",
+    "lat": 51.5330843,
+    "lon": 0.0544661,
+    "zone": 4,
+    "category": "residential"
+  },
+  {
+    "name": "Stoke Newington London",
+    "lat": 51.5578698,
+    "lon": -0.0822482,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Clapton London",
+    "lat": 51.558602,
+    "lon": -0.0558777,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Herne Hill London",
+    "lat": 51.4554407,
+    "lon": -0.1001002,
+    "zone": 3,
+    "category": "residential"
+  },
+  {
+    "name": "Brixton Hill London",
+    "lat": 51.455184,
+    "lon": -0.1193821,
+    "zone": 2,
+    "category": "residential"
+  },
+  {
+    "name": "City of London",
+    "lat": 51.5156177,
+    "lon": -0.0919983,
+    "zone": 1,
+    "category": "business"
+  },
+  {
+    "name": "Mayfair London",
+    "lat": 51.5110872,
+    "lon": -0.147058,
+    "zone": 1,
+    "category": "business"
+  },
+  {
+    "name": "Soho London",
+    "lat": 51.5140654,
+    "lon": -0.1350494,
+    "zone": 1,
+    "category": "business"
+  },
+  {
+    "name": "Clerkenwell London",
+    "lat": 51.5239164,
+    "lon": -0.10951,
+    "zone": 1,
+    "category": "business"
+  },
+  {
+    "name": "Paddington Basin London",
+    "lat": 51.5184294,
+    "lon": -0.1736276,
+    "zone": 2,
+    "category": "business"
+  },
+  {
+    "name": "Nine Elms London",
+    "lat": 51.4801837,
+    "lon": -0.1296937,
+    "zone": 2,
+    "category": "business"
+  },
+  {
+    "name": "White City London",
+    "lat": 51.5116219,
+    "lon": -0.2245282,
+    "zone": 3,
+    "category": "business"
+  },
+  {
+    "name": "Stratford International station London",
+    "lat": 51.5454521,
+    "lon": -0.0065939,
+    "zone": 3,
+    "category": "business"
+  },
+  {
+    "name": "Fleet Street London",
+    "lat": 51.5137203,
+    "lon": -0.1119235,
+    "zone": 1,
+    "category": "business"
+  },
+  {
+    "name": "Aldgate East London",
+    "lat": 51.5158057,
+    "lon": -0.0699691,
+    "zone": 2,
+    "category": "business"
+  },
+  {
+    "name": "Euston Road London",
+    "lat": 51.5247178,
+    "lon": -0.1385303,
+    "zone": 1,
+    "category": "business"
+  },
+  {
+    "name": "Victoria Embankment London",
+    "lat": 51.5102125,
+    "lon": -0.1171562,
+    "zone": 1,
+    "category": "business"
+  }
+]

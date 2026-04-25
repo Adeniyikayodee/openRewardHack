@@ -98,13 +98,16 @@ def synthesize_vehicles(n: int, depot_id: str, heterogeneity: float,
 def synthesize_cvrptw_requests(n: int, nodes: list[dict], depot_idx: int,
                                 params: dict, rng: random.Random,
                                 horizon: int = 960) -> list[dict]:
-    """cvrptw: depot → dropoff only (no explicit pickup node).
+    """cvrptw: depot → dropoff. modelled in the unified TaskSpec as a
+    pickup-at-depot + dropoff request so the runtime treats every request
+    identically.
 
     each request gets a unique dropoff node so the solver can apply distinct
     time windows without conflicts on a shared CumulVar.
     """
     reqs = []
     by_idx = {nd["idx"]: nd for nd in nodes}
+    depot_nd = by_idx[depot_idx]
     non_depot = [nd["idx"] for nd in nodes if nd["idx"] != depot_idx]
     if not non_depot:
         return reqs
@@ -123,16 +126,22 @@ def synthesize_cvrptw_requests(n: int, nodes: list[dict], depot_idx: int,
         half_width  = int(60 + (1 - tw_tightness) * 240)
         e_do = max(released_at, center - half_width)
         l_do = min(horizon, center + half_width)
+        # pickup happens at the depot; window is wide so the dropoff window
+        # is the binding constraint.
+        e_pu = released_at
+        l_pu = l_do
         reqs.append({
             "id": f"r-{i}",
-            "kind": "delivery",
+            "kind": "parcel",
+            "pickup_node_idx":  depot_idx,
             "dropoff_node_idx": do,
+            "pickup_lat":  depot_nd["lat"], "pickup_lon":  depot_nd["lon"],
             "dropoff_lat": by_idx[do]["lat"],
             "dropoff_lon": by_idx[do]["lon"],
             "passengers":  passengers,
             "wheelchairs": wheelchairs,
-            "earliest_dropoff": e_do,
-            "latest_dropoff":   l_do,
+            "earliest_pickup":  e_pu, "latest_pickup":  l_pu,
+            "earliest_dropoff": e_do, "latest_dropoff": l_do,
             "service_time": 2,
             "priority":    priority,
             "released_at": released_at,
