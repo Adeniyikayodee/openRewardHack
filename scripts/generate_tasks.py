@@ -363,8 +363,17 @@ def build_plan(quick: bool, n_tasks: int | None = None) -> list[tuple[str, int, 
         plan.append(("train", 20_000 + i, 1 + (i * 79) // 69))
     for i in range(25):
         plan.append(("test", 30_000 + i, 50 + (i * 50) // 24))
-    if n_tasks is not None:
-        plan = plan[:n_tasks]
+    if n_tasks is not None and n_tasks < len(plan):
+        # proportional downsample, preserving 5/70/25 ratio with all 5
+        # tutorial tasks kept whenever possible.
+        n_tut = min(5, n_tasks)
+        rest  = n_tasks - n_tut
+        n_train = round(rest * 70 / 95)
+        n_test  = rest - n_train
+        tut   = [p for p in plan if p[0] == "tutorial"][:n_tut]
+        train = [p for p in plan if p[0] == "train"][:n_train]
+        test_ = [p for p in plan if p[0] == "test"][:n_test]
+        plan  = tut + train + test_
     return plan
 
 

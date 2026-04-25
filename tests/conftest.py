@@ -78,9 +78,10 @@ def server(tasks_parquet_dir):
     """Spin up `python -m src.server` with ORWD_DATA_DIR pointing at the
     fixture-backed parquet. Module-scoped so test_integration and
     test_rollout share one server."""
-    env = {**os.environ, "ORWD_DATA_DIR": str(tasks_parquet_dir)}
+    env = {**os.environ, "ORWD_DATA_DIR": str(tasks_parquet_dir),
+           "PORT": "8080"}
     proc = subprocess.Popen(
-        ["python", "-m", "src.server"], env=env, cwd=str(ROOT),
+        ["python", "-m", "src"], env=env, cwd=str(ROOT),
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     time.sleep(4)
     if proc.poll() is not None:

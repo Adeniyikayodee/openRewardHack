@@ -14,5 +14,6 @@ COPY scripts/__init__.py scripts/__init__.py
 COPY scripts/fetch_weather.py scripts/fetch_weather.py
 COPY scripts/generate_tasks.py scripts/generate_tasks.py
 
-EXPOSE 8000
-CMD ["python", "-m", "src.server"]
+EXPOSE 8080
+ENV PORT=8080
+CMD ["python", "-m", "src"]

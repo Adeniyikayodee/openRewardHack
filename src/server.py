@@ -510,7 +510,3 @@ class LondonDynamicRouting(Environment):
     def submit_plan(self, params: EmptyParams) -> ToolOutput:
         """Terminate the episode and grade the final plan."""
         return self._finalize("Submitted by agent")
-
-
-if __name__ == "__main__":
-    Server([LondonDynamicRouting]).run()
